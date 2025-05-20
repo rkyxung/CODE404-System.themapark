@@ -1,0 +1,43 @@
+/* rgb 흔들림 전환 효과 */
+@keyframes RGB {
+  0% {
+    filter: none;
+  }
+
+  50% {
+    filter: drop-shadow(2px 0 red) drop-shadow(-2px 0 blue);
+  }
+
+  100% {
+    opacity: 0;
+    filter: none;
+  }
+}
+
+.RGB {
+  animation: RGB 1s ease-out forwards;
+}
+
+/* crt 모니터 전환 효과 */
+@keyframes crtOut {
+  0% {
+    opacity: 1;
+    mask-image: linear-gradient(to bottom,
+        black 0%,
+        transparent 45%,
+        transparent 55%,
+        black 100%);
+  }
+
+  100% {
+    opacity: 1;
+    mask-image: linear-gradient(to bottom, black 0%, black 100%);
+  }
+}
+
+.crtOut {
+  animation: crtOut 1s ease-in-out forwards;
+  mask-image: linear-gradient(to bottom, transparent 30%, black 50%, transparent 70%);
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+}

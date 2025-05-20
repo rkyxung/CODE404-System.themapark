@@ -1,0 +1,626 @@
+@font-face {
+  font-family: "NeoDunggeunmo Pro";
+  src: url("fonts/NeoDunggeunmoPro-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  font-family: "NeoDunggeunmo Pro", sans-serif;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #000;
+}
+
+.Themapark {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* 배경 */
+.background {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.Floor {
+  position: absolute;
+  width: 100vw;
+  height: 9vh;
+  object-fit: cover;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+}
+
+/* 놀이기구 배치 */
+.Coaster {
+  position: absolute;
+  bottom: 8vh;
+  left: 0;
+  width: 70vw;
+  z-index: 1;
+}
+
+.Gyrodrop {
+  position: absolute;
+  bottom: 7.5vh;
+  left: 6vw;
+  height: 85vh;
+  z-index: 2;
+}
+
+.FerrisWheel {
+  position: absolute;
+  bottom: 7.5vh;
+  right: 6vw;
+  height: 80vh;
+  z-index: 2;
+}
+
+.MerryGoRound {
+  position: absolute;
+  bottom: 4vh;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 60vh;
+  z-index: 3;
+}
+
+.Office {
+  position: absolute;
+  bottom: 5vh;
+  right: 8vw;
+  height: 30vh;
+  z-index: 3;
+}
+
+.StartHover {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* 게임 시작씬 */
+/* 텍스트 및 버튼 */
+.SystemFrame_start {
+  position: absolute;
+  top: 15vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: auto;
+
+  /* padding:3vh 0vw;
+  background-color: rgba(8, 70, 109, 0.2);
+  border: 6px solid rgb(0, 230, 255);
+  border-radius:1.5vw; */
+
+  /* 텍스트*/
+  /* font-family: 'Roboto', sans-serif;
+  font-weight: 700; */
+  letter-spacing: 0.3vw;
+  font-size: 4.5vw;
+  color: rgb(0, 230, 255);
+  /* 줄바꿈 허용 */
+  white-space: pre-wrap;
+  text-align: center;
+  z-index: 4;
+}
+
+.SystemFrame_start span.hover {
+  color: rgb(230, 0, 0);
+}
+
+.start-button {
+  position: absolute;
+  bottom: 12vh;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2vw;
+  padding: 0.5vw 1.2vw;
+  color: rgb(0, 230, 255);
+  background-color: rgba(8, 70, 109, 0.5);
+  border: 3px solid rgb(0, 230, 255);
+  border-radius: 1vw;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.start-button:hover {
+  /* 텍스트 테두리 */
+  -webkit-text-stroke: 0.05vw rgb(156, 243, 250);
+  background-color: rgba(8, 70, 109, 0.5);
+  box-shadow: 0 0 0 0.5px rgb(156, 243, 250);
+}
+
+/* 게임 진행 */
+.SystemFrame {
+  position: absolute;
+  top: 8vh;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99999;
+}
+
+.SystemIntro {
+  /* ✅ 너비 고정 + 높이는 자동 */
+  width: 30vw;
+  height: auto;
+
+  /* ✅ 안쪽 여백 및 외곽 스타일 */
+  padding: 2vh 2vw;
+  background-color: rgba(8, 70, 109, 0.5);
+  border: 3px solid rgb(14, 223, 237);
+  border-radius: 1vw;
+
+  /* ✅ 텍스트 관련 스타일 */
+  font-size: 1.25vw;
+  line-height: 1.75vw;
+  color: rgb(14, 223, 237);
+  white-space: pre-wrap;
+  /* 줄바꿈 허용 */
+
+  /* ✅ 줄 추가를 위한 구조 변경 */
+  display: flex;
+  flex-direction: column;
+  /* 줄을 세로 방향으로 쌓기 */
+  gap: 0.5vh;
+  /* 줄 간 간격 */
+}
+
+.SystemMessage {
+  /* ✅ 너비 고정 + 높이는 자동 */
+  min-width: 30vw;
+  height: auto;
+
+  /* ✅ 안쪽 여백 및 외곽 스타일 */
+  padding: 2vh 2vw;
+  background-color: rgba(230, 0, 0, 0.1);
+  border: 2px solid rgb(230, 0, 0);
+  border-radius: 1vw;
+
+  /* ✅ 텍스트 관련 스타일 */
+  font-size: 1.25vw;
+  line-height: 1.5vw;
+  color: rgb(230, 0, 0);
+  white-space: pre-wrap;
+  /* 줄바꿈 허용 */
+
+  /* ✅ 줄 추가를 위한 구조 변경 */
+  display: flex;
+  flex-direction: column;
+  /* 줄을 세로 방향으로 쌓기 */
+  gap: 0.5vh;
+  /* 줄 간 간격 */
+}
+
+#timer {
+  position: absolute;
+  width: 10vw;
+  height: auto;
+  top: 6vh;
+  right: 2vw;
+  z-index: 99999;
+
+  /* ✅ 안쪽 여백 및 외곽 스타일 */
+  /* padding: 1.5vh 1vw;
+  background-color: rgba(230, 0, 0, 0.1);
+  border: 3px solid rgb(230, 0, 0);
+  border-radius: 1vw; */
+
+  /* ✅ 텍스트 관련 스타일 */
+  font-size: 2.25vw;
+  line-height: 1.5vw;
+  color: rgb(230, 0, 0);
+  white-space: pre-wrap;
+  /* 줄바꿈 허용 */
+  text-align: center;
+}
+
+/* .fade {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s;
+} */
+
+.hidden {
+  display: none;
+}
+
+/* 글리치 */
+#glitch-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  /* 밑에 이미지 클릭 가능하게 */
+  z-index: 1;
+}
+
+/* 관리실 문 (퍼즐1번) */
+.Error_office {
+  width: 100vw;
+  height: 100vh;
+}
+
+#office_flowChart {
+  position: absolute;
+  width: 13vw;
+  height: auto;
+  top: 45vh;
+  right: 12vw;
+}
+
+#office_password {
+  position: absolute;
+  width: 6vw;
+  height: auto;
+  top: 57vh;
+  left: 19vw;
+}
+
+#door {
+  position: absolute;
+  width: 33vw;
+  height: auto;
+  top: 10vh;
+  left: 31.1vw;
+  opacity: 0;
+}
+
+
+#open_black {
+  position: absolute;
+  width: 33vw;
+  height: auto;
+  top: 10vh;
+  left: 31.1vw;
+}
+
+#open_door {
+  position: absolute;
+  width: 25vw;
+  height: auto;
+  top: 13.5vh;
+  left: 39.3vw;
+}
+
+/* .zoom_pass {
+  overflow: hidden;
+  transform: scale(3);
+  transform-origin: 7.2% 68%;
+}
+
+.zoom_flow {
+  overflow: hidden;
+  transform: scale(2.5);
+  transform-origin: 100% 62%;
+} */
+
+.modal.Password,
+.modal.Chart {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+}
+
+.modal div {
+  position: absolute;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 0;
+  top: 47.9vh;
+  left: 50.2vw;
+  /* width: 20vw;
+  height: 20vh; */
+  transform: translateX(-50%);
+  opacity: 0.2;
+}
+
+#num span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3.4vw;
+  height: 3.3vw;
+  font-weight: bold;
+  /* border: 1px solid #000; */
+}
+
+.modal span:active {
+  background: red;
+}
+
+#modal_password {
+  position: absolute;
+  top: 55vh;
+  left: 50vw;
+  width: 20vw;
+  height: auto;
+  transform: translate(-50%, -50%);
+}
+
+#modal_flowchart {
+  position: absolute;
+  top: 57vh;
+  left: 50vw;
+  width: 25vw;
+  height: auto;
+  transform: translate(-50%, -50%);
+}
+
+/* 관리실 내부(퍼즐2,3) */
+.Error_officeInside {
+  width: 100vw;
+  height: 100vh;
+}
+
+#clock {
+  position: absolute;
+  top: 10vh;
+  left: 9vw;
+  width: 7.5vw;
+  height: auto;
+}
+
+#locker {
+  position: absolute;
+  bottom: 10vh;
+  left: 16vw;
+  width: 26vw;
+  height: auto;
+}
+
+#computer {
+  position: absolute;
+  bottom: 32.5vh;
+  left: 18.5vw;
+  width: 17vw;
+  height: auto;
+}
+
+#board {
+  position: absolute;
+  top: 8vh;
+  left: 46vw;
+  width: 28.5vw;
+  height: auto;
+}
+
+#electric {
+  position: absolute;
+  top: 15vh;
+  right: 7.5vw;
+  width: 8vw;
+  height: auto;
+}
+
+#guideline {
+  position: absolute;
+  top: 15vh;
+  right: 42.7vw;
+  width: 8vw;
+  height: auto;
+}
+
+#memo_kim {
+  position: absolute;
+  top: 33.6vh;
+  right: 34.2vw;
+  width: 6.5vw;
+  height: auto;
+}
+
+#memo_manager {
+  position: absolute;
+  top: 22.8vh;
+  right: 30.2vw;
+  width: 4.2vw;
+  height: auto;
+}
+
+#memo_afternoon {
+  position: absolute;
+  top: 17.5vh;
+  right: 32.5vw;
+  width: 6vw;
+  height: auto;
+}
+
+#btn01 {
+  position: absolute;
+  top: 18vh;
+  right: 13.2vw;
+  width: 1.1vw;
+  height: auto;
+}
+
+.btn_up {
+  background-image: url(img/OFFICE/btn_up.png);
+  width: 100vw;
+  height: 100vh;
+}
+
+#btn02 {
+  position: absolute;
+  top: 18vh;
+  right: 11.8vw;
+  width: 1.1vw;
+  height: auto;
+}
+
+#btn03 {
+  position: absolute;
+  top: 18vh;
+  right: 10.4vw;
+  width: 1.1vw;
+  height: auto;
+}
+
+#btn04 {
+  position: absolute;
+  top: 18vh;
+  right: 9vw;
+  width: 1.1vw;
+  height: auto;
+}
+
+.dark {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  pointer-events: none;
+  mask-image: radial-gradient(circle 250px at var(--x, 50%) var(--y, 50%),
+      transparent 0%,
+      black 100%);
+  z-index: 999;
+}
+
+.zoom_board {
+  overflow: hidden;
+  transform: scale(3.5);
+  transform-origin: 64% 20%;
+}
+
+.zoom_electric {
+  overflow: hidden;
+  transform: scale(4.3);
+  transform-origin: 100% 10%;
+}
+
+/* 컴퓨터 정면뷰 */
+.Computer_puzzle03 {
+  width: 100vw;
+  height: 100vh;
+}
+
+#computer_background {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+}
+
+#keyboard {
+  position: absolute;
+  bottom: 4.2vh;
+  left: 31.5vw;
+  width: 37vw;
+  height: auto;
+}
+
+#mouse {
+  position: absolute;
+  bottom: 7.2vh;
+  right: 19vw;
+  width: 8.5vw;
+  height: auto;
+}
+
+#computer_front {
+  position: absolute;
+  bottom: 27vh;
+  left: 27.2vw;
+  width: 45.5vw;
+  height: auto;
+}
+
+#computer_message {
+  position: absolute;
+  top: 38vh;
+  left: 43vw;
+  color: rgb(230, 0, 0);
+  font-size: 5vw;
+  letter-spacing: 0.5vw;
+  z-index: 999;
+}
+
+#computer_password {
+  position: absolute;
+  /* ✅ 너비 고정 + 높이는 자동 */
+  width: 20vw;
+  height: 2vh;
+  bottom: 45vh;
+  left: 38.5vw;
+
+  /* ✅ 안쪽 여백 및 외곽 스타일 */
+  padding: 2vh 1.5vw;
+  border: 2px solid rgb(230, 0, 0);
+  justify-content: center;
+
+  /* ✅ 텍스트 관련 스타일 */
+  font-size: 1.25vw;
+  line-height: 2vh;
+  color: rgb(230, 0, 0);
+  /* 줄바꿈 허용 */
+  white-space: pre-wrap;
+  z-index: 999;
+}
+
+/* #computer_answer {
+  position: absolute;
+  top: 13vh;
+  left: 30vw;
+  width: 40vw;
+  height: 43vh;
+  background: #fff;
+  z-index: 999;
+} */
+
+/* 사물함 뷰 */
+.locker_view,
+#locker_background {
+  width: 100vw;
+  height: 100vh;
+}
+
+#locker_top {
+  position: absolute;
+  top: 15.5vh;
+  left: 25vw;
+  width: 50.5vw;
+  height: auto;
+}
+
+#locker_memo {
+  position: absolute;
+  top: 29vh;
+  left: 34.5vw;
+  width: 31vw;
+  height: auto;
+}
+
+.zoom_locker {
+  overflow: hidden;
+  transform: scale(2.2);
+  transform-origin: 50% 48.5%;
+}
+
+.zoom_computer {
+  overflow: hidden;
+  transform: scale(1.5);
+  transform-origin: 50% 25%;
+}

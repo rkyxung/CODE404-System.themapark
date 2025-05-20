@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Code 404: Themepark</title>
+  <link rel="stylesheet" href="index.css" />
+  <link rel="stylesheet" href="animation.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <!-- <div class="Bg hidden"></div>
+  <div class="black hidden"></div> -->
+  <!-- 오류 전 테마파크 씬 -->
+  <div class="Themapark">
+    <img src="img/Background.png" class="background" alt="background" />
+    <img src="img/Floor.png" class="Floor" alt="Floor" />
+    <img src="img/Coaster.png" class="Coaster" alt="roller coaster" />
+    <img src="img/Gyrodrop.png" class="Gyrodrop" alt="Gyro drop" />
+    <img src="img/FerrisWheel.png" class="FerrisWheel" alt="Ferris wheel" />
+    <img src="img/MerryGoRound.png" class="MerryGoRound" alt="MerryGoRound" />
+    <img src="img/Office.png" class="Office" alt="Office" />
+  </div>
+
+  <img class="StartHover hidden" src="img/start_hover.png" alt="start_hover background">
+
+  ```
+  <!-- 시스템 프레임 (오류 전/후 모두 사용) -->
+  <div class="SystemFrame hidden">
+    <!-- 오류 메시지 출력용 -->
+    <div class="SystemIntro"></div>
+    <!-- 오류 후 호버 시 메시지 출력용 -->
+    <div class="SystemMessage hidden"></div>
+  </div>
+
+  <div id="timer" class="hidden">10:00</div>
+
+  <!-- 게임 시작 화면 -->
+  <div class="StartScene">
+    <div class="SystemFrame_start">CODE 404: Syste<span>m.themepark</span></div>
+    <div class="start-button">GAME START</div>
+  </div>
+
+  <!-- 오류 발생 후 테마파크 화면 -->
+  <div class="Error_themapark hidden">
+    <img id="bg" src="img/error/Bg_error.png" class="background glitch" alt="Background" />
+    <img id="floor" src="img/error/Floor_error.png" class="Floor glitch" alt="Floor" />
+    <img id="coaster" src="img/error/Coaster_error.png" class="Coaster glitch" alt="Roller coaster" />
+    <img id="gyro" src="img/error/Gyro_error.png" class="Gyrodrop glitch" alt="Gyro drop" />
+    <img id="ferris" src="img/error/Fw_error.png" class="FerrisWheel glitch" alt="Ferris wheel" />
+    <img id="merry" src="img/error/Mgr_error.png" class="MerryGoRound glitch" alt="MerryGoRound" />
+    <img id="office" src="img/error/Office_error.png" class="Office glitch" alt="Office" />
+  </div>
+
+  <!-- 관리실 문 -->
+  <div class="Error_office hidden">
+    <img id="office_bg" src="img/error/ErrorOffice_Bg.png" class="background glitch" alt="Office background" />
+    <img id="door" src="img/error/open_black.png" alt="office open black" />
+    <img id="office_flowChart" src="img/error/ErrorOffice_flowChart.png" alt="Office flow chart" />
+    <div>
+      <img id="office_password" src="img/error/ErrorOffice_password.png" alt="Office password" />
+    </div>
+    <div class="open hidden">
+      <img id="open_black" src="img/error/open_black.png" alt="office open black" />
+      <img id="open_door" src="img/error/open_door.png" alt="office open door" />
+    </div>
+    <div class="modal Password hidden">
+      <img id="modal_password" src="img/error/ErrorOffice_password.png" alt="Office password" />
+      <div id="num">
+        <span data-num="1"></span>
+        <span data-num="2"></span>
+        <span data-num="3"></span>
+        <span data-num="4"></span>
+        <span data-num="5"></span>
+        <span data-num="6"></span>
+        <span data-num="7"></span>
+        <span data-num="8"></span>
+        <span data-num="9"></span>
+        <span data-num="*"></span>
+        <span data-num="0"></span>
+        <span data-num="#"></span>
+      </div>
+    </div>
+    <div class="modal Chart hidden">
+      <img id="modal_flowchart" src="img/error/ErrorOffice_flowChart.png" alt="Office flow chart">
+    </div>
+  </div>
+
+  <!-- 관리실 안 -->
+  <div class="Error_officeInside hidden">
+    <img id="inside_bg" src="img/OFFICE/inside_bg.png" class="background glitch" alt="Office inside background" />
+    <img id="clock" src="img/OFFICE/clock.png" alt="Office inside clock" />
+    <img id="locker" src="img/OFFICE/locker.png" alt="Office inside locker" />
+    <img id="board" src="img/OFFICE/board.png" alt="Office inside board" />
+    <img id="computer" src="img/OFFICE/computer.png" alt="Office inside computer" />
+    <img id="memo_afternoon" src="img/OFFICE/memo_afternoon.png" alt="Office inside memo_afternoon" />
+    <img id="memo_kim" src="img/OFFICE/memo_kim.png" alt="Office inside memo_kim" />
+    <img id="memo_manager" src="img/OFFICE/memo_manager.png" alt="Office inside memo_manager" />
+    <img id="guideline" src="img/OFFICE/guideline.png" alt="Office inside guideline" />
+    <div class="electric_wrapper">
+      <img id="electric" src="img/OFFICE/electric.png" alt="Office inside electric" />
+      <img id="btn01" data-num="3" src="img/OFFICE/btn_down.png" alt="Office inside electric btn01" />
+      <img id="btn02" data-num="2" src="img/OFFICE/btn_down.png" alt="Office inside electric btn02" />
+      <img id="btn03" data-num="4" src="img/OFFICE/btn_down.png" alt="Office inside electric btn03" />
+      <img id="btn04" data-num="1" src="img/OFFICE/btn_down.png" alt="Office inside electric btn04" />
+    </div>
+    <!-- 퍼즐2 암전 -->
+    <div class="dark"></div>
+  </div>
+
+  <!-- 컴퓨터 정면 -->
+  <div class="Computer_puzzle03 hidden">
+    <img id="computer_background" src="img/OFFICE/computer_bg.png" alt="computer background" />
+    <img id="keyboard" src="img/OFFICE/keyboard.png" alt="keyboard" />
+    <img id="mouse" src="img/OFFICE/mouse.png" alt="mouse" />
+    <img id="computer_front" src="img/OFFICE/computer_front.png" alt="computer front" />
+    <div id="computer_message"> ERROR </div>
+    <div id="computer_password">password: </div>
+    <div id="computer_answer"></div>
+  </div>
+  <!-- 사물함 top 뷰 -->
+  <div class="locker_view hidden">
+    <img id="locker_background" src="img/OFFICE/locker_bg.png" alt="locker background" />
+    <img id="locker_top" src="img/OFFICE/locker_top.png" alt="locker top" />
+    <img id="locker_memo" src="img/OFFICE/locker_memo.png" alt="locker memo" />
+  </div>
+
+  <!-- 글리치 캔버스 -->
+  <canvas id="glitch-layer"></canvas>
+
+
+  <script type="module" src="script/main.js"></script>
+</body>
+
+</html>
