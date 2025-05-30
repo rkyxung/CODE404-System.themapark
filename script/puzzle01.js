@@ -4,9 +4,10 @@ import {
 import {
   glitch
 } from "./glitch.js";
+import { deepGlitch } from "./deepGlitch.js";
 
 export function puzzle01(onComplete) {
-  const ErrorThemapark = document.querySelector(".Error_themapark");
+  const ErrorThemepark = document.querySelector(".Error_themepark");
   const ErrorOffice = document.querySelector(".Error_office");
   const ErrorOfficeBg = document.getElementById("office_bg");
   const flowChart = document.getElementById("office_flowChart");
@@ -25,21 +26,21 @@ export function puzzle01(onComplete) {
 
   ErrorOfficeBg.addEventListener("click", () => {
     ErrorOffice.classList.add("hidden");
-    ErrorThemapark.classList.remove("hidden");
+    ErrorThemepark.classList.remove("hidden");
     message.innerText = "";
     message.classList.add("hidden");
   })
 
   door.addEventListener("click", () => {
-    
+
     setTimeout(() => {
       message.classList.remove("hidden");
-      message.innerText = "문이 잠겼습니다. \n비밀번호를 입력하세요."
+      message.innerText = "접근 차단됨. \n보안 구역은 인증이 필요합니다."
 
       setTimeout(() => {
         message.innerText = "";
         message.classList.add("hidden");
-      }, 1000);
+      }, 1700);
     }, 0);
 
   })
@@ -47,7 +48,7 @@ export function puzzle01(onComplete) {
   password.addEventListener("click", () => {
     modalPassword.classList.remove("hidden");
     message.classList.remove("hidden");
-    message.innerText = "비밀번호를 입력하세요 \npassword : ";
+    message.innerText = "비밀번호를 입력하십시오. \npassword : ";
   });
 
   flowChart.addEventListener("click", () => {
@@ -59,6 +60,7 @@ export function puzzle01(onComplete) {
 
   modalPassword.addEventListener("click", (e) => {
     if (e.target === modalPassword) {
+      pswd = "";
       modalPassword.classList.add("hidden");
       message.classList.add("hidden");
     }
@@ -79,9 +81,9 @@ export function puzzle01(onComplete) {
       }
 
       if (pswd.length === 4) {
-        if (pswd === "3456") {
+        if (pswd === "0817") {
           setTimeout(() => {
-            message.innerText = "정답";
+            message.innerText = "인증 성공. \n보안 구역 접근 권한이 부여됩니다.";
 
             setTimeout(() => {
               modalPassword.classList.add("hidden");
@@ -92,13 +94,13 @@ export function puzzle01(onComplete) {
           answer = true;
         } else {
           setTimeout(() => {
-            message.innerText = "오답";
+            message.innerText = "인증 실패. \n비밀번호가 일치하지 않습니다.";
 
             setTimeout(() => {
               wrongTime(10);
               pswd = "";
-              message.innerText = "비밀번호를 입력하세요\npassword : ";
-            }, 500);
+              message.innerText = "비밀번호를 입력하십시오. \npassword : ";
+            }, 1500);
           }, 1000);
         }
       }
@@ -112,7 +114,16 @@ export function puzzle01(onComplete) {
     open.addEventListener("click", () => {
       ErrorOffice.classList.add("hidden");
       inside.classList.remove("hidden");
-      glitch();
+      
+      setTimeout(() => {
+        message.classList.remove("hidden");
+        message.innerText = ">메인 전력 차단됨 \n>비상 전력으로 전환됨 : 손전등 모드 활성화"
+        console.log("메시지창 열림");
+        setTimeout(() => {
+          message.classList.add("hidden");
+          console.log("메시지창 닫힘");
+        }, 1500);
+      }, 500);
       if (onComplete) onComplete(); //puzzle 스크립트 구분 짓기 위함. 성공했으면 다음 단계로
     });
 

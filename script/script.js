@@ -2,9 +2,9 @@
 // ✅ [1] 주요 화면 요소 선택
 const StartBtn = document.querySelector(".start-button"); // HTML에서 class가 'start-button'인 요소를 선택 → 이 버튼을 클릭하면 게임이 시작됨
 const StartScene = document.querySelector(".StartScene"); // 시작 화면 전체 요소를 선택 (시작 장면 배경 등)
-const Themapark = document.querySelector(".Themapark"); // 정상 상태의 테마파크 배경을 선택
+const Themepark = document.querySelector(".Themepark"); // 정상 상태의 테마파크 배경을 선택
 const SystemFrame = document.querySelector(".SystemFrame"); // 시스템 메시지가 출력될 프레임(박스)을 선택
-const error = document.querySelector(".Error_themapark"); // 오류 상태의 테마파크 배경을 선택
+const error = document.querySelector(".Error_themepark"); // 오류 상태의 테마파크 배경을 선택
 const SystemTxt = document.querySelector(".SystemIntro"); // 시스템 메시지를 출력할 텍스트 박스 요소를 선택
 
 // ✅ [2] 시스템 메시지 배열 (2초 간격으로 출력될 메시지들)
@@ -38,7 +38,7 @@ StartBtn.addEventListener("click", () => {
 
       // ✅ 모든 메시지가 출력된 후 3초 뒤에 상태 전환
       setTimeout(() => {
-        Themapark.classList.add("hidden"); // 정상 테마파크 배경 숨김
+        Themepark.classList.add("hidden"); // 정상 테마파크 배경 숨김
         SystemTxt.classList.add("hidden"); // 시스템 텍스트 박스 숨김
         error.classList.remove("hidden"); // 오류 테마파크 배경 보이기
 

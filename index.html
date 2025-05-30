@@ -17,14 +17,14 @@
   <!-- <div class="Bg hidden"></div>
   <div class="black hidden"></div> -->
   <!-- 오류 전 테마파크 씬 -->
-  <div class="Themapark">
-    <img src="img/Background.png" class="background" alt="background" />
-    <img src="img/Floor.png" class="Floor" alt="Floor" />
-    <img src="img/Coaster.png" class="Coaster" alt="roller coaster" />
-    <img src="img/Gyrodrop.png" class="Gyrodrop" alt="Gyro drop" />
-    <img src="img/FerrisWheel.png" class="FerrisWheel" alt="Ferris wheel" />
-    <img src="img/MerryGoRound.png" class="MerryGoRound" alt="MerryGoRound" />
-    <img src="img/Office.png" class="Office" alt="Office" />
+  <div class="Themepark">
+    <img id="bg_normal" src="img/Background.png" class="background" alt="background" />
+    <img id="floor_normal" src="img/Floor.png" class="Floor" alt="Floor" />
+    <img id="coaster_normal" src="img/Coaster.png" class="Coaster" alt="roller coaster" />
+    <img id="gyro_normal" src="img/Gyrodrop.png" class="Gyrodrop" alt="Gyro drop" />
+    <img id="ferris_normal" src="img/FerrisWheel.png" class="FerrisWheel" alt="Ferris wheel" />
+    <img id="merry_normal" src="img/MerryGoRound.png" class="MerryGoRound" alt="MerryGoRound" />
+    <img id="office_normal" src="img/Office.png" class="Office" alt="Office" />
   </div>
 
   <img class="StartHover hidden" src="img/start_hover.png" alt="start_hover background">
@@ -36,7 +36,14 @@
     <div class="SystemIntro"></div>
     <!-- 오류 후 호버 시 메시지 출력용 -->
     <div class="SystemMessage hidden"></div>
+    <div class="errorMessage hidden"></div>
   </div>
+
+  <div class="YorN hidden">
+    <button id="YES">YES</button>
+    <button id="NO">NO</button>
+  </div>
+
 
   <div id="timer" class="hidden">10:00</div>
 
@@ -47,14 +54,14 @@
   </div>
 
   <!-- 오류 발생 후 테마파크 화면 -->
-  <div class="Error_themapark hidden">
-    <img id="bg" src="img/error/Bg_error.png" class="background glitch" alt="Background" />
-    <img id="floor" src="img/error/Floor_error.png" class="Floor glitch" alt="Floor" />
-    <img id="coaster" src="img/error/Coaster_error.png" class="Coaster glitch" alt="Roller coaster" />
-    <img id="gyro" src="img/error/Gyro_error.png" class="Gyrodrop glitch" alt="Gyro drop" />
-    <img id="ferris" src="img/error/Fw_error.png" class="FerrisWheel glitch" alt="Ferris wheel" />
-    <img id="merry" src="img/error/Mgr_error.png" class="MerryGoRound glitch" alt="MerryGoRound" />
-    <img id="office" src="img/error/Office_error.png" class="Office glitch" alt="Office" />
+  <div class="Error_themepark hidden">
+    <img id="bg_error" src="img/error/Bg_error.png" class="background glitch" alt="Background" />
+    <img id="floor_error" src="img/error/Floor_error.png" class="Floor glitch" alt="Floor" />
+    <img id="coaster_error" src="img/error/Coaster_error.png" class="Coaster glitch" alt="Roller coaster" />
+    <img id="gyro_error" src="img/error/Gyro_error.png" class="Gyrodrop glitch" alt="Gyro drop" />
+    <img id="ferris_error" src="img/error/Fw_error.png" class="FerrisWheel glitch" alt="Ferris wheel" />
+    <img id="merry_error" src="img/error/Mgr_error.png" class="MerryGoRound glitch" alt="MerryGoRound" />
+    <img id="office_error" src="img/error/Office_error.png" class="Office glitch" alt="Office" />
   </div>
 
   <!-- 관리실 문 -->
@@ -133,6 +140,35 @@
   <!-- 글리치 캔버스 -->
   <canvas id="glitch-layer"></canvas>
 
+  <div id="puzzleBoard"></div>
+
+  <div class="gameOver hidden">
+    <div id="m1" class="hidden">&gt;&gt;&gt; >>> FATAL ERROR: System integrity check failed at 0x0047:000C &lt;&lt;&lt;</div>
+    <div id="m2" class="hidden">▒▒▒▒▒▒▒▒▒▒▒▒ ERROR CODE: ∆F-404-NULL ▒▒▒▒▒▒▒▒▒▒▒▒</div>
+    <div id="m3" class="hidden">☓☓☓ 𝙍𝙐𝙉𝙏𝙄𝙈𝙀_𝙍𝙐𝙄𝙉 ☓☓☓</div>
+    <div id="m4" class="hidden">&gt;&gt;&gt; Attempting Recovery... FAILED</div>
+    <div id="m5" class="hidden">⧗ SIGSEGV at address 0x0000FFFF</div>
+    <div id="m6" class="hidden">FATAL: stack_trace[undefined] &gt; SYNTAX_ERR in /exit/protocol: ∃ undefined</div>
+    <div id="m7" class="hidden">!! HALT : MEMORY_CORE_DUMP !!</div>
+    <div id="m8" class="hidden">█████ SYSTEM_PULSE LOST █████</div>
+    <div id="m9" class="hidden">⚠︎ ERROR.CODE::INJECTION::UNKNOWN ⚠︎</div>
+    <div id="m10" class="hidden">reboot > /dev/null ::BOOTLOADER::LOST:: </div>
+    <div id="m11" class="hidden">~!@#ERROR!~!@#%~! /core/identity/UID-037.dump : corrupted !@#ERROR!~!@#%~!</div>
+    <div id="m12" class="hidden">⚠ WARNING: SYSTEM_LOOP_DETECTED</div>
+    <div id="m13" class="hidden">err[∞]: error(err[∞])</div>
+    <div id="m14" class="hidden">&gt;&gt; echo $DEAD_VAR &gt;&gt; freeze</div>
+    <div id="m15" class="hidden"> &gt; command: kill -9 1</div>
+    <div id="m16" class="hidden">&gt;&gt;&gt;&gt;&gt;&gt; ☠︎ ☠︎ ☠︎☠︎☠︎☠︎☠︎ ☠︎ ☠︎ &lt;&lt;&lt;&lt;&lt;&lt;</div>
+    <div id="m17" class="hidden">☢︎ eEroROeRrRRoOo ____ ☢︎</div>
+    <div id="m18" class="hidden">✖✖✖✖✖✖✖✖✖✖☒ corrupted.index.buffer[]✖✖✖✖✖✖✖✖✖✖</div>
+    <div id="m19" class="hidden">∑ signal 11 (Segmentation fault) $ sudo rm -rf /reality</div>
+    <div id="m20" class="hidden">&gt; core.log: line 194 ~~~ !EJECTED. !ESCAPED. !ALLOWED.</div>
+    <div id="m21" class="hidden">||||||||| SIGSEGV → SIGILL → SIGABRT → ??? |||||||||</div>
+    <div id="m22" class="hidden">□□□ crash_dump_saved_to_null □□□</div>
+    <div id="m23" class="hidden">☓ address 0x0000 not reachable ☓</div>
+    <div id="m24" class="hidden">☓☓☓☓ 0110_Fa1lur3</div>
+    <div id="m25" class="hidden">□□□□□□□□ LOST_SIGNAL</div>
+  </div>
 
   <script type="module" src="script/main.js"></script>
 </body>

@@ -1,18 +1,18 @@
 import { glitch } from './glitch.js';
 
-// ✅ [6] 오류 상태에서 마우스 호버 시 메시지 출력 함수
-export function errormessage(getIsErrorState) {
-  const Message = document.querySelector(".SystemMessage"); // 호버 메시지를 출력할 박스 선택
-  const ErrorOffice = document.querySelector(".Error_office.hidden");
-  const ErrorThemapark = document.querySelector(".Error_themapark");
 
-  // ✅ id와 메시지로만 구성된 배열 정의 (더 간단한 구조)
+export function errormessage(getIsErrorState) {
+  const Message = document.querySelector(".SystemMessage");
+  const ErrorOffice = document.querySelector(".Error_office");
+  const ErrorThemepark = document.querySelector(".Error_themepark");
+
+
   const ridesHover = [
-    { id: "coaster", message: "롤러코스터입니다." },
-    { id: "merry", message: "회전목마입니다." },
-    { id: "gyro", message: "자이로드롭입니다." },
-    { id: "ferris", message: "대관람차입니다." },
-    { id: "office", message: "관리실입니다." },
+    { id: "coaster_error", message: "롤러코스터입니다." },
+    { id: "merry_error", message: "회전목마입니다." },
+    { id: "gyro_error", message: "자이로드롭입니다." },
+    { id: "ferris_error", message: "대관람차입니다." },
+    { id: "office_error", message: "관리실입니다." },
   ];
 
   const ridesClick = [
@@ -55,7 +55,7 @@ export function errormessage(getIsErrorState) {
       Message.classList.remove("hidden"); // 메시지 박스 보이기
 
       if (ride.id === "office") {
-        ErrorThemapark.classList.add("hidden");
+        ErrorThemepark.classList.add("hidden");
         ErrorOffice.classList.remove("hidden");
         Message.classList.add("hidden");
 

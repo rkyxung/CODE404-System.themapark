@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"> <!-- 문서 인코딩을 UTF-8로 설정합니다 -->
+  <title>조각별 이미지 퍼즐</title> <!-- 페이지 제목을 지정합니다 -->
+  <style>
+    body {
+      background: #111; /* 배경을 어둡게 설정해서 퍼즐이 돋보이게 합니다 */
+      margin: 0; /* 기본 여백을 제거합니다 */
+      height: 100vh; /* 화면 전체 높이를 사용합니다 */
+    }
+    #puzzle-board {
+      position: relative; /* 자식 요소들의 절대배치를 위해 기준 컨테이너로 만듭니다 */
+      width: 400px; /* 퍼즐 보드의 가로 크기를 400px로 설정합니다 */
+      height: 400px; /* 퍼즐 보드의 세로 크기를 400px로 설정합니다 */
+      margin: auto; /* 보드를 화면 정중앙에 배치합니다 */
+      top: 50%; /* 수직 중앙 배치를 위한 초기값입니다 */
+      transform: translateY(-50%); /* 수직 중앙으로 정확히 이동시킵니다 */
+      border: 2px solid #fff; /* 보드 테두리를 흰색으로 표시합니다 */
+    }
+    .piece {
+      position: absolute; /* 개별 조각을 절대위치로 배치할 수 있게 합니다 */
+      width: 100px; /* 조각 하나의 가로 크기를 100px로 설정합니다 */
+      height: 100px; /* 조각 하나의 세로 크기를 100px로 설정합니다 */
+      cursor: grab; /* 마우스 커서를 잡기 형태로 변경합니다 */
+      user-select: none; /* 드래그 중 텍스트 선택이 되지 않도록 합니다 */
+      z-index: 10; /* 기본 z-index를 설정합니다 */
+    }
+    .dragging {
+      z-index: 99; /* 드래그 중인 조각이 다른 조각 위로 올라오게 합니다 */
+      opacity: 0.8; /* 드래그 중 투명도를 살짝 낮춥니다 */
+    }
+    #completeMessage {
+      position: absolute; /* 메시지 위치를 절대배치로 설정합니다 */
+      top: calc(50% + 220px); /* 보드 아래에 메시지를 배치합니다 */
+      left: 50%; /* 메시지를 가로 중앙에 배치합니다 */
+      transform: translateX(-50%); /* 가로 중앙으로 정확히 이동시킵니다 */
+      color: #4FFF5A; /* 완료 메시지 색을 밝은 초록으로 합니다 */
+      font-size: 24px; /* 메시지 글자 크기를 24px로 설정합니다 */
+      font-weight: bold; /* 메시지를 굵게 표시합니다 */
+      text-shadow: 0 0 5px #4FFF5A; /* 메시지에 은은한 그림자를 추가합니다 */
+    }
+  </style>
+</head>
+<body>
+  <div id="puzzle-board"></div> <!-- 퍼즐 조각이 들어갈 보드 컨테이너입니다 -->
+  <div id="completeMessage"></div> <!-- 퍼즐 완료 시 메시지를 보여줄 요소입니다 -->
+
+  <script>
+    const board = document.getElementById("puzzle-board"); // 퍼즐 보드 요소를 가져옵니다
+    const completeMessage = document.getElementById("completeMessage"); // 메시지 요소를 가져옵니다
+
+    const size = 100; // 한 조각의 너비/높이를 100px로 정의합니다
+    const positions = []; // 정답 위치(x,y)를 저장할 배열을 선언합니다
+
+    // 4x4 그리드의 정답 위치를 계산하여 positions에 추가합니다
+    for (let row = 0; row < 4; row++) { // 4개의 행을 순회합니다
+      for (let col = 0; col < 4; col++) { // 4개의 열을 순회합니다
+        positions.push({ x: col * size, y: row * size }); // (0,0),(100,0)... 위치를 배열에 추가합니다
+      }
+    }
+
+    // positions 배열을 무작위로 섞은 복사본을 생성하여 shuffled에 저장합니다
+    const shuffled = [...positions].sort(() => Math.random() - 0.5);
+
+    const pieces = []; // 생성된 조각 요소를 담을 배열을 선언합니다
+
+    // 16개의 조각(<img>)을 생성하여 보드에 배치합니다
+    positions.forEach((correctPos, index) => {
+      const img = document.createElement("img"); // 새로운 <img> 요소를 생성합니다
+      img.src = `piece${index + 1}.png`; // 파일명(piece1.png~piece16.png)을 설정합니다
+      img.className = "piece"; // CSS 클래스(piece) 를 적용합니다
+
+      // 조각의 초기 위치를 섞인(shuffled) 좌표로 배치합니다
+      img.style.left = shuffled[index].x + "px"; // x 좌표를 설정합니다
+      img.style.top = shuffled[index].y + "px"; // y 좌표를 설정합니다
+
+      // 정답 위치를 data- 속성에 저장해둡니다
+      img.dataset.correctX = correctPos.x; // 정답 x 좌표를 저장합니다
+      img.dataset.correctY = correctPos.y; // 정답 y 좌표를 저장합니다
+
+      board.appendChild(img); // 보드에 조각을 추가합니다
+      pieces.push(img); // 배열에도 조각 요소를 추가합니다
+    });
+
+    let selected = null; // 현재 드래그 중인 조각을 저장할 변수입니다
+    let offsetX = 0, offsetY = 0; // 마우스 클릭 위치와 조각 좌표 차이를 저장할 변수입니다
+
+    // 보드에 mousedown 이벤트를 걸어 '드래그 시작'을 처리합니다
+    board.addEventListener("mousedown", (e) => {
+      if (!e.target.classList.contains("piece")) return; // 조각이 아니면 무시합니다
+      selected = e.target; // 드래그 중인 조각을 selected에 저장합니다
+      selected.classList.add("dragging"); // 시각적 효과(dragging 클래스)를 추가합니다
+
+      // 클릭한 지점과 조각의 좌표 차이를 계산합니다
+      const rect = selected.getBoundingClientRect(); // 조각의 현재 위치와 크기를 가져옵니다
+      offsetX = e.clientX - rect.left; // 클릭 지점과 조각 왼쪽 간격을 저장합니다
+      offsetY = e.clientY - rect.top; // 클릭 지점과 조각 위쪽 간격을 저장합니다
+    });
+
+    // 보드에 mousemove 이벤트를 걸어 '드래그 중 위치 업데이트'를 처리합니다
+    board.addEventListener("mousemove", (e) => {
+      if (!selected) return; // 드래그 중이 아니면 무시합니다
+      // 마우스 위치에서 보드의 왼쪽/위쪽 위치를 빼고 offset을 보정하여 조각 위치를 계산합니다
+      const x = e.clientX - board.getBoundingClientRect().left - offsetX; 
+      const y = e.clientY - board.getBoundingClientRect().top - offsetY; 
+      selected.style.left = x + "px"; // 계산한 x 위치를 적용합니다
+      selected.style.top = y + "px"; // 계산한 y 위치를 적용합니다
+    });
+
+    // 보드에 mouseup 이벤트를 걸어 '드래그 종료 및 드롭 처리'를 합니다
+    board.addEventListener("mouseup", () => {
+      if (!selected) return; // 드래그 중이 아니면 무시합니다
+
+      // 현재 조각 위치를 정수(px)로 읽어옵니다
+      const x = parseInt(selected.style.left);
+      const y = parseInt(selected.style.top);
+
+      // 가까운 100px 단위 그리드로 반올림하여 스냅 위치를 계산합니다
+      const snappedX = Math.round(x / size) * size; 
+      const snappedY = Math.round(y / size) * size; 
+
+      // 계산된 스냅 위치를 조각에 적용합니다
+      selected.style.left = snappedX + "px"; 
+      selected.style.top = snappedY + "px"; 
+      selected.classList.remove("dragging"); // 드래그 클래스 제거합니다
+      selected = null; // selected 변수를 초기화합니다
+
+      checkComplete(); // 드롭 후 퍼즐 완성 여부를 검사합니다
+    });
+
+    // 모든 조각이 제자리인지 검사하는 함수입니다
+    function checkComplete() {
+      // every()로 pieces 배열의 모든 조각이 정답 위치인지 확인합니다
+      const complete = pieces.every((piece) => {
+        const cx = parseInt(piece.style.left); // 현재 x 위치
+        const cy = parseInt(piece.style.top);  // 현재 y 위치
+        // 현재 위치가 data-correct 위치와 모두 같으면 true
+        return cx === parseInt(piece.dataset.correctX) &&
+               cy === parseInt(piece.dataset.correctY);
+      });
+
+      // 전체가 맞으면 메시지를 표시합니다
+      if (complete) {
+        completeMessage.innerText = "🎉 퍼즐 완료! 오류가 복구되었습니다."; 
+      }
+    }
+  </script>
+</body>
+</html>

@@ -41,3 +41,35 @@
   mask-size: 100% 100%;
   mask-repeat: no-repeat;
 }
+
+/* 시스템메시지창 흔들림 효과 */
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+
+  20% {
+    transform: translate(-20px, -5px);
+  }
+
+  40% {
+    transform: translateX(0px);
+  }
+
+  60% {
+    transform: translate(20px, 5px);
+  }
+
+  80% {
+    transform: translateX(-10px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+
+.shake {
+  animation: shake 0.5s cubic-bezier(0.9, 0.3, 0.53, 1.64) infinite;
+}

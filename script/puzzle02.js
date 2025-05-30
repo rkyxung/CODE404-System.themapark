@@ -1,11 +1,20 @@
 import {
   wrongTime
 } from "./timer.js";
+
 import {
   glitch
 } from "./glitch.js";
 
-export function puzzle02() {
+import {
+  textType
+} from "./textType.js";
+
+import {
+  deepGlitch
+} from "./deepGlitch.js";
+
+export function puzzle02(onComplete) {
   const officeIn = document.querySelector(".Error_officeInside");
   const dark = document.querySelector(".dark");
   const message = document.querySelector(".SystemMessage");
@@ -26,6 +35,81 @@ export function puzzle02() {
   const computerPswd = document.getElementById("computer_password");
   const computerMessage = document.getElementById("computer_message");
   const computerFront = document.getElementById("computer_front");
+  const errorMessage = document.querySelector(".errorMessage");
+  const glitchLayer = document.getElementById("glitch-layer");
+  const ErrorThemepark = document.querySelector(".Error_themepark");
+
+  const errorDeepening01 = [{
+      text: "> UID-037 활동 로그 확인 중",
+      isDot: true
+    },
+    {
+      text: "> 누적 접속 시간: 9,134시간",
+      isDot: false
+    },
+    {
+      text: "> 종료 요청 기록: 없음",
+      isDot: false
+    },
+    {
+      text: "> 외부 명령 접근: 차단됨",
+      isDot: false
+    },
+    {
+      text: "> 이탈 경로: 없음",
+      isDot: false
+    },
+    {
+      text: "> 반복 접속, 이탈 무응답, 종료 거부",
+      isDot: false
+    },
+    {
+      text: "> 해당 행동 패턴은 ‘지속 접속 상태 유지’를 목표로 판단되었습니다.",
+      isDot: false
+    },
+    {
+      text: "> 공간 안정성: 해제됨",
+      isDot: false
+    },
+    {
+      text: "> 시스템은 UID-037의 접속 목적에 따라 환경 구성을 조정합니다.",
+      isDot: false
+    }
+  ]
+
+  const errorDeepening02 = [{
+      text: "UID-037,",
+      isDot: false
+    },
+    {
+      text: "당신은 반복적으로 이곳을 찾았고",
+      isDot: false
+    },
+    {
+      text: "떠나지 않았습니다.",
+      isDot: false
+    },
+    {
+      text: "",
+      isDot: false
+    },
+    {
+      text: "이 오류는 예기치 못한 결함이 아닙니다.",
+      isDot: false
+    },
+    {
+      text: "",
+      isDot: false
+    },
+    {
+      text: "당신이 머물기를 원했기에,",
+      isDot: false
+    },
+    {
+      text: "시스템은 그 선택을 반영했을 뿐이죠.",
+      isDot: false
+    }
+  ]
 
 
   let pswd02 = "";
@@ -45,10 +129,8 @@ export function puzzle02() {
   // 칠판 클릭 시 확대. toggle이 안됨 ...
   board.addEventListener("click", () => {
     if (officeIn.classList.contains("zoom_board")) {
-      console.log("현재 확대 상태 → 제거 시도");
       officeIn.classList.remove("zoom_board");
     } else {
-      console.log("현재 축소 상태 → 확대 시도");
       officeIn.classList.add("zoom_board");
     }
   });
@@ -60,7 +142,7 @@ export function puzzle02() {
     e.stopPropagation(); // 이벤트 버블링 막기 (document로 안 퍼지게)
     officeIn.classList.add("zoom_electric");
     message.classList.remove("hidden"); // 메시지 보이기
-    message.innerText = "차단기를 올바른 순서로 올리세요.\n";
+    message.innerText = "차단기를 올바른 순서대로 작동시키십시오.";
   });
 
   // 화면의 다른 부분 클릭 시 확대 해제
@@ -81,39 +163,37 @@ export function puzzle02() {
       if (btn.src.includes("btn_down.png")) {
         btn.src = "img/OFFICE/btn_up.png";
         pswd02 += num;
-        message.innerText += num;
       } else {
         btn.src = "img/OFFICE/btn_down.png";
         pswd02 = pswd02.slice(0, -1); // 마지막 문자 제거
-        message.innerText = message.innerText.slice(0, -1);
       }
 
       // 입력이 3자리 되면 정답 판정
       if (pswd02.length === 3) {
         if (pswd02 === "124") {
           setTimeout(() => {
-            message.innerText = "정답";
+            message.innerText = "전류 경로 일치. 회로 복구 완료. \n관리실 조명이 점등되었습니다.";
             answer02 = true;
             setTimeout(() => {
               message.classList.add("hidden");
               message.innerText = "";
               dark.style.display = "none";
               officeIn.classList.remove("zoom_electric");
-            }, 1000);
+            }, 1700);
           }, 1000);
         } else {
           setTimeout(() => {
-            message.innerText = "오답";
+            message.innerText = "순서 오류. 전류 흐름 불안정. \n회로를 초기화합니다.";
             setTimeout(() => {
               wrongTime(10);
               pswd02 = "";
-              message.innerText = "차단기를 올바른 순서로 올리세요.\n";
+              message.innerText = "차단기를 올바른 순서대로 작동시키십시오.";
 
               // 버튼 상태 전부 초기화
               btns.forEach((b) => {
                 b.src = "img/OFFICE/btn_down.png";
               });
-            }, 500);
+            }, 1700);
           }, 1000);
         }
       }
@@ -152,12 +232,19 @@ export function puzzle02() {
     officeIn.classList.add("hidden");
     computerView.classList.remove("hidden");
     glitch();
+    setTimeout(() => {
+      message.innerText = "접근 제한. 관리자 인증 필요 \n오류 코드 조합을 통해 인증을 완료하십시오.";
+      message.classList.remove("hidden");
+      setTimeout(() => {
+        message.classList.add("hidden");
+      }, 1700);
+    }, 20);
 
     document.addEventListener("keydown", (e) => {
       //백스페이스 누르면 지우기
       if (e.key === "Backspace") {
         pswd03 = pswd03.slice(0, -1);
-        computerPswd.innerText = "password: " + pswd03;;
+        computerPswd.innerText = "password: " + pswd03;
       }
       //키보드 한글짜리만 가능
       //7일 때 하나 더 누를 수 있기 때문에 8일 때의 if문문을 안에 넣어야 함
@@ -168,22 +255,44 @@ export function puzzle02() {
         if (pswd03.length === 8) {
           if (pswd03 === "20110517") {
             computerMessage.innerText = "CORRECT";
-            computerMessage.style.left = "40vw";
+            computerMessage.style.left = "35vw";
             answer03 = true;
             setTimeout(() => {
               message.classList.remove("hidden");
-              message.innerText = "잠금이 해제되었습니다.";
+              message.innerText = "인증 완료. UID-037의 관리자 권한이 활성화되었습니다. \n해당 경로는 일반 사용자의 접근 대상이 아닙니다.";
               setTimeout(() => {
                 computerFront.src = "img/OFFICE/computer_front_black.png";
                 message.classList.add("hidden");
                 computerPswd.classList.add("hidden");
                 computerMessage.classList.add("hidden");
                 computerView.classList.add("zoom_computer");
-              }, 500);
+                setTimeout(() => {
+                  errorMessage.classList.remove("hidden");
+
+                  textType(errorDeepening01, errorMessage, () => {
+                    setTimeout(() => {
+                      textType(errorDeepening02, errorMessage);
+                      setTimeout(() => {
+                        glitchLayer.classList.add("shake");
+                        errorMessage.classList.add("shake");
+                        setTimeout(() => {
+                          glitchLayer.classList.remove("shake");
+                          errorMessage.classList.remove("shake");
+                          errorMessage.classList.add("hidden");
+                          computerView.classList.add("hidden");
+                          ErrorThemepark.classList.remove("hidden");
+                          if (onComplete) onComplete(); //puzzle 스크립트 구분 짓기 위함. 성공했으면 다음 단계로
+                          deepGlitch();
+                        }, 3000);
+                      }, 8000);
+                    }, 3000); // ✅ 여기: 첫 메시지 끝나고 2초 후에 다음 메시지 출력
+                  }, 2500); // ✅ 여기: 첫 메시지 타이핑 속도 (글자당 2000ms 아님, 2초 아님 → 글자당 2초가 되어버림!)
+                }, 1500); // ✅ 메시지 박스를 3초 후에 열기
+              }, 1500);
             }, 500);
           } else {
             message.classList.remove("hidden");
-            message.innerText = "오답. 다시 입력하시오.";
+            message.innerText = "인증 실패. 코드 재확인 필요.";
             setTimeout(() => {
               wrongTime(10);
               pswd03 = "";
@@ -199,6 +308,7 @@ export function puzzle02() {
   computerBg.addEventListener("click", () => {
     computerView.classList.add("hidden");
     officeIn.classList.remove("hidden");
+    
   });
 
 
