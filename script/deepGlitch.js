@@ -19,8 +19,8 @@ export function deepGlitch() {
   bufferCanvas.height = canvas.height;
 
   // 글리치 대상 요소 모음
-  function getTargets() {
-    return [
+  const targets =
+    [
       ...document.querySelectorAll(".background.glitch"),
       document.querySelector(".Coaster.glitch"),
       document.querySelector(".Floor.glitch"),
@@ -53,7 +53,6 @@ export function deepGlitch() {
       document.getElementById("locker_top"),
       document.getElementById("locker_memo")
     ].filter(Boolean);
-  }
 
   // ✅ 픽셀화 (버퍼 캔버스에 적용)
   function pixelate(ctxTarget, pixelSize = 80) {
