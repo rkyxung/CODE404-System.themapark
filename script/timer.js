@@ -1,3 +1,5 @@
+import { gameOver } from "./gameOver.js";
+
 let Timer = 0; // ✅ 전체 남은 시간
 let countdown = null;
 let timerBox = null;
@@ -25,7 +27,8 @@ export function timer(time) {
 
     if (Timer <= 0) {
       clearInterval(countdown); // 타이머 종료
-      timerBox.textContent = "GAME OVER"; // 종료 메시지 표시
+      timerBox.classList.add("hidden");
+      gameOver();
     }
   }, 1000); // 1초마다 실행
 }
@@ -37,4 +40,12 @@ export function wrongTime(seconds) {
     Timer = 0;
   }
   updateTimerDisplay(); // ✅ 시간 감소 후 바로 UI 갱신
+}
+
+// ✅ 타이머를 중단시키는 함수
+export function stopTimer() {
+  if (countdown) {
+    clearInterval(countdown); // setInterval 중단
+    countdown = null; // 변수 초기화 (불필요한 재실행 방지)
+  }
 }

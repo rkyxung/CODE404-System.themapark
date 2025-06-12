@@ -46,7 +46,7 @@ let currentPuzzle = 1;
 let puzzle01once = false;
 let puzzle02once = false;
 let puzzle03once = false;
-let puzzle04once = false
+let puzzle04once = false;
 
 // 현재 퍼즐 번호에 따라 해당 퍼즐을 실행하는 함수
 function Puzzle() {
@@ -81,7 +81,6 @@ function Puzzle() {
     puzzle04(() => {
       // 퍼즐2가 끝난 후 처리할 로직이 있다면 여기에 작성
       console.log("퍼즐4 완료");
-      Puzzle();
     });
   }
 }
@@ -95,6 +94,51 @@ function main() {
     ridesMessage,
     getIsErrorState: () => ErrorValue
   });
+
+  // 🌟 URL 파라미터에서 stage 값 확인 (예: ?stage=2)
+  const params = new URLSearchParams(window.location.search);
+  const stage = params.get("stage");
+
+  if (stage === "1") {
+    console.log("URL → 퍼즐1 바로 진입");
+    document.querySelector(".Error_officeInside") ?.classList.remove("hidden");
+    puzzle01once = true;
+    currentPuzzle = 2;
+    puzzle01(() => {});
+    return; // 이후 Puzzle() 중복 실행 방지
+  }
+
+  if (stage === "2") {
+    console.log("URL → 퍼즐2 바로 진입");
+    document.querySelector(".Error_officeInside") ?.classList.remove("hidden");
+    document.querySelector(".dark") ?.classList.remove("hidden");
+    puzzle02once = true;
+    currentPuzzle = 3;
+    puzzle02(() => {});
+    return;
+  }
+
+  if (stage === "3") {
+    console.log("URL → 퍼즐3 바로 진입");
+    document.querySelector(".Computer_puzzle03") ?.classList.remove("hidden");
+    puzzle03once = true;
+    currentPuzzle = 4;
+    puzzle03(() => {});
+    return;
+  }
+
+  if (stage === "4") {
+    console.log("URL → 퍼즐4 바로 진입");
+    document.querySelector(".puzzleBoard") ?.classList.remove("hidden");
+    document.querySelector(".Themepark")?.classList.add("hidden");
+    document.querySelector(".StartScene")?.classList.add("hidden");
+    document.querySelector(".SystemFrame")?.classList.remove("hidden");
+    puzzle04once = true;
+    currentPuzzle = 5;
+    puzzle04(() => {});
+    return;
+  }
+
 
 
   // 퍼즐 실행 흐름 시작

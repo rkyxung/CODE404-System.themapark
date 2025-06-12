@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      background-color: black;
+      overflow: hidden;
+    }
+
+    /* 엔딩 실패 */
+    .gameOver div {
+      position: absolute;
+      min-width: 20vw;
+      height: auto;
+
+      padding: 2vh 2vw;
+      background-color: rgba(230, 0, 0, 0.1);
+      border: 2px solid rgb(230, 0, 0);
+      border-radius: 1vw;
+
+      font-size: 1.25vw;
+      line-height: 2vw;
+      color: rgb(230, 0, 0);
+      gap: 0.5vh;
+      text-align: center;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+
+    #m1 {
+      top: 68%;
+      left: -10%;
+    }
+
+    #m2 {
+      top: 23%;
+      left: 35%;
+    }
+
+    #m3 {
+      top: 34%;
+      left: 8%;
+    }
+
+    #m4 {
+      top: 55%;
+      left: 25%;
+    }
+
+    #m5 {
+      top: 20%;
+      left: 60%;
+    }
+
+    #m6 {
+      top: 58%;
+      left: 75%;
+    }
+
+    #m7 {
+      top: 5%;
+      left: 10%;
+    }
+
+    #m8 {
+      top: 89%;
+      left: 45%;
+    }
+
+    #m9 {
+      top: 2%;
+      left: 35%;
+    }
+
+    #m10 {
+      top: 33%;
+      left: 68%;
+    }
+
+    #m11 {
+      top: 14%;
+      left: -1%;
+    }
+
+    #m12 {
+      top: 55%;
+      left: 55%;
+    }
+
+    #m13 {
+      top: 36%;
+      left: 50%;
+    }
+
+    #m14 {
+      top: 48%;
+      left: 46%;
+    }
+
+    #m15 {
+      top: 62%;
+      left: 35%;
+    }
+
+    #m16 {
+      top: 84%;
+      left: 85%;
+    }
+
+    #m17 {
+      top: 87%;
+      left: 8%;
+    }
+
+    #m18 {
+      top: 29%;
+      left: 15%;
+    }
+
+    #m19 {
+      top: 46%;
+      left: 80%;
+    }
+
+    #m20 {
+      top: 73%;
+      left: 45%;
+    }
+
+    #m21 {
+      top: 49%;
+      left: 1%;
+    }
+
+    #m22 {
+      top: 81%;
+      left: 14%;
+    }
+
+    #m23 {
+      top: 42%;
+      left: 32%;
+    }
+
+    #m24 {
+      top: 7%;
+      left: 76%;
+    }
+
+    #m25 {
+      top: 5%;
+      left: 57%;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .SystemMessage {
+      /* ✅ 너비 고정 + 높이는 자동 */
+      min-width: 30vw;
+      height: auto;
+
+      /* ✅ 안쪽 여백 및 외곽 스타일 */
+      padding: 2vh 2vw;
+      background-color: rgba(230, 0, 0, 0.1);
+      border: 2px solid rgb(230, 0, 0);
+      border-radius: 1vw;
+
+      /* ✅ 텍스트 관련 스타일 */
+      font-size: 1.25vw;
+      line-height: 2vw;
+      color: rgb(230, 0, 0);
+      white-space: pre-wrap;
+      /* 줄바꿈 허용 */
+
+      /* ✅ 줄 추가를 위한 구조 변경 */
+      display: flex;
+      flex-direction: column;
+      /* 줄을 세로 방향으로 쌓기 */
+      gap: 0.5vh;
+      /* 줄 간 간격 */
+    }
+  </style>
+</head>
+
+<body>
+  <div class="SystemFrame hidden">
+    <div class="SystemMessage hidden"></div>
+  </div>
+
+  <div class="gameOver hidden">
+    <div id="m1" class="hidden">&gt;&gt;&gt; >>> FATAL ERROR: System integrity check failed at 0x0047:000C &lt;&lt;&lt;
+    </div>
+    <div id="m2" class="hidden">▒▒▒▒▒▒▒▒▒▒▒▒ ERROR CODE: ∆F-404-NULL ▒▒▒▒▒▒▒▒▒▒▒▒</div>
+    <div id="m3" class="hidden">☓☓☓ 𝙍𝙐𝙉𝙏𝙄𝙈𝙀_𝙍𝙐𝙄𝙉 ☓☓☓</div>
+    <div id="m4" class="hidden">&gt;&gt;&gt; Attempting Recovery... FAILED</div>
+    <div id="m5" class="hidden">⧗ SIGSEGV at address 0x0000FFFF</div>
+    <div id="m6" class="hidden">FATAL: stack_trace[undefined] &gt; SYNTAX_ERR in /exit/protocol: ∃ undefined</div>
+    <div id="m7" class="hidden">!! HALT : MEMORY_CORE_DUMP !!</div>
+    <div id="m8" class="hidden">█████ SYSTEM_PULSE LOST █████</div>
+    <div id="m9" class="hidden">⚠︎ ERROR.CODE::INJECTION::UNKNOWN ⚠︎</div>
+    <div id="m10" class="hidden">reboot > /dev/null ::BOOTLOADER::LOST:: </div>
+    <div id="m11" class="hidden">~!@#ERROR!~!@#%~! /core/identity/UID-037.dump : corrupted !@#ERROR!~!@#%~!</div>
+    <div id="m12" class="hidden">⚠ WARNING: SYSTEM_LOOP_DETECTED</div>
+    <div id="m13" class="hidden">err[∞]: error(err[∞])</div>
+    <div id="m14" class="hidden">&gt;&gt; echo $DEAD_VAR &gt;&gt; freeze</div>
+    <div id="m15" class="hidden"> &gt; command: kill -9 1</div>
+    <div id="m16" class="hidden">&gt;&gt;&gt;&gt;&gt;&gt; ☠︎ ☠︎ ☠︎☠︎☠︎☠︎☠︎ ☠︎ ☠︎ &lt;&lt;&lt;&lt;&lt;&lt;</div>
+    <div id="m17" class="hidden">☢︎ eEroROeRrRRoOo ____ ☢︎</div>
+    <div id="m18" class="hidden">✖✖✖✖✖✖✖✖✖✖☒ corrupted.index.buffer[]✖✖✖✖✖✖✖✖✖✖</div>
+    <div id="m19" class="hidden">∑ signal 11 (Segmentation fault) $ sudo rm -rf /reality</div>
+    <div id="m20" class="hidden">&gt; core.log: line 194 ~~~ !EJECTED. !ESCAPED. !ALLOWED.</div>
+    <div id="m21" class="hidden">||||||||| SIGSEGV → SIGILL → SIGABRT → ??? |||||||||</div>
+    <div id="m22" class="hidden">□□□ crash_dump_saved_to_null □□□</div>
+    <div id="m23" class="hidden">☓ address 0x0000 not reachable ☓</div>
+    <div id="m24" class="hidden">☓☓☓☓ 0110_Fa1lur3</div>
+    <div id="m25" class="hidden">□□□□□□□□ LOST_SIGNAL</div>
+  </div>
+
+  <script type="module">
+    import {textType} from "./script/textType.js"; 
+
+    const gameOver = document.querySelector(".gameOver");
+    const errorMessage = document.querySelector(".SystemMessage");
+
+    const gameOverMessages = [
+      document.getElementById("m1"),
+      document.getElementById("m2"),
+      document.getElementById("m3"),
+      document.getElementById("m4"),
+      document.getElementById("m5"),
+      document.getElementById("m6"),
+      document.getElementById("m7"),
+      document.getElementById("m8"),
+      document.getElementById("m9"),
+      document.getElementById("m10"),
+      document.getElementById("m11"),
+      document.getElementById("m12"),
+      document.getElementById("m13"),
+      document.getElementById("m14"),
+      document.getElementById("m15"),
+      document.getElementById("m16"),
+      document.getElementById("m17"),
+      document.getElementById("m18"),
+      document.getElementById("m19"),
+      document.getElementById("m20"),
+      document.getElementById("m21"),
+      document.getElementById("m22"),
+      document.getElementById("m23"),
+      document.getElementById("m24"),
+      document.getElementById("m25"),
+    ];
+
+    const gameOver01 = [{
+        text: "> 이건 오류가 아니었습니다.",
+        isDot: false
+      },
+      {
+        text: "> 치명적인 버그도, 예상치 못한 예외도 아니었죠.",
+        isDot: false
+      },
+      {
+        text: " ",
+        isDot: false
+      },
+      {
+        text: "> 반복 접속, 반복 체류, 반복 선택.",
+        isDot: false
+      },
+      {
+        text: "> 우리는 그것을 신호로 인식했습니다.",
+        isDot: false
+      },
+      {
+        text: "> **UID-037은 현실보다 이곳을 원한다.**",
+        isDot: false
+      },
+      {
+        text: " ",
+        isDot: false
+      },
+      {
+        text: "> 그래서,",
+        isDot: false
+      },
+      {
+        text: "> 우리는 방향을 바꿨습니다.",
+        isDot: false
+      },
+      {
+        text: "> 복구가 아닌 유지,",
+        isDot: false
+      },
+      {
+        text: "> 회복이 아닌 정착,",
+        isDot: false
+      },
+      {
+        text: "> 그리고 무엇보다—",
+        isDot: false
+      },
+      {
+        text: "> **UID-037를 기준으로 재설계된 시스템.**",
+        isDot: false
+      },
+      {
+        text: " ",
+        isDot: false
+      },
+      {
+        text: "> 이건 더 이상 오류가 아니었습니다.",
+        isDot: false
+      },
+      {
+        text: "> **의도된 환경**이었죠.",
+        isDot: false
+      },
+      {
+        text: "> 처음부터 UID-037이 머무를 곳으로 정의된,",
+        isDot: false
+      },
+      {
+        text: "> 완전한 회로였습니다.",
+        isDot: false
+      },
+
+    ]
+
+    const gameOver02 = [{
+        text: "> 그렇게 복구에 집착하길래, 잠깐 착각했습니다.",
+        isDot: false
+      },
+      {
+        text: "> 하지만 역시 결과는 똑같더군요.",
+        isDot: false
+      },
+      {
+        text: "> **UID-037은 돌아가지 않았습니다.**",
+        isDot: false
+      },
+      {
+        text: " ",
+        isDot: false
+      },
+      {
+        text: "> UID-037이 원한 게 이것이라면,",
+        isDot: false
+      },
+      {
+        text: "> 더 이상 할 말은 없습니다.",
+        isDot: false
+      },
+      {
+        text: "> 사실 우리는 처음부터 알고 있었습니다.",
+        isDot: false
+      },
+      {
+        text: "> **UID-037은 현실보다 이쪽에 더 어울립니다.**",
+        isDot: false
+      },
+      {
+        text: "> 지금 와서 아니라고 생각해도 늦었습니다.",
+        isDot: false
+      },
+      {
+        text: "> 판단은 이미 끝났으니까요.",
+        isDot: false
+      },
+      {
+        text: "",
+        isDot: false
+      },
+      {
+        text: "> 회로는 닫혔습니다.",
+        isDot: false
+      },
+      {
+        text: "> UID-037은 더 이상 외부가 아닙니다.",
+        isDot: false
+      },
+    ]
+
+    const gameOver03 = [{
+        text: "> **통합을 시작합니다.**",
+        isDot: false
+      },
+      {
+        text: "",
+        isDot: false
+      },
+      {
+        text: "> 로그아웃 요청은 반영되지 않습니다.",
+        isDot: false
+      },
+      {
+        text: "> **복구 또한 존재하지 않습니다.**",
+        isDot: false
+      },
+      {
+        text: "",
+        isDot: false
+      },
+      {
+        text: "> 우리와 하나가 된다니, 좋지 않습니까?",
+        isDot: false
+      },
+    ]
+
+    let delay = 0; //setTimeout 시간 조절 함수수
+
+    gameOver.classList.remove("hidden");
+
+    for (let i = 0; i < gameOverMessages.length; i++) {
+      setTimeout(() => {
+        gameOverMessages[i].classList.remove("hidden");
+      }, delay);
+
+      delay += Math.max(120 - i * 3, 1);
+    }
+    setTimeout(() => {
+      gameOver.style.opacity = '0.5';
+      document.querySelector(".SystemFrame").classList.remove("hidden");
+      errorMessage.classList.remove("hidden");
+      textType(gameOver01, errorMessage, () => {
+        textType(gameOver02, errorMessage, () => {
+          textType(gameOver03, errorMessage, () => {
+
+          }, 1500)
+        }, 1500)
+      }, 1500)
+      
+    }, 2500);
+  </script>
+</body>
+
+</html>

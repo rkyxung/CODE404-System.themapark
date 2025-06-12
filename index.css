@@ -155,7 +155,18 @@ body {
   top: 8vh;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 999999;
+}
+
+#blackBg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
   z-index: 99999;
+  display: none;
 }
 
 .SystemIntro {
@@ -182,6 +193,7 @@ body {
   /* 줄을 세로 방향으로 쌓기 */
   gap: 0.5vh;
   /* 줄 간 간격 */
+  z-index: 999999;
 }
 
 .SystemMessage {
@@ -234,10 +246,19 @@ body {
   /* 줄 간 간격 */
 }
 
+.YorN {
+  display: flex;
+  justify-content: space-between;
+}
+
+.YorN button:hover {
+  -webkit-text-stroke: 0.05vw rgb(156, 243, 250);
+  background-color: rgba(8, 70, 109, 0.5);
+  box-shadow: 0 0 0 0.5px rgb(156, 243, 250);
+}
+
 #YES {
-  position: absolute;
-  top: 18vh;
-  left: 44vw;
+  margin: 2vh 0 0 9vw;
   width: 5vw;
   font-size: 1.5vw;
   padding: 0.5vw 1.2vw;
@@ -250,9 +271,7 @@ body {
 }
 
 #NO {
-  position: absolute;
-  top: 18vh;
-  right: 44vw;
+  margin: 2vh 9vw 0 0;
   width: 5vw;
   font-size: 1.5vw;
   padding: 0.5vw 1.2vw;
@@ -697,8 +716,12 @@ body {
   text-align: center;
   overflow: hidden;
   white-space: nowrap;
+  z-index: 99999;
 }
 
+.gameOver {
+  background-color: #000;
+}
 
 #m1 {
   top: 68%;
@@ -823,4 +846,62 @@ body {
 #m25 {
   top: 5%;
   left: 57%;
+}
+
+/* 퍼즐04 */
+.puzzleBoard {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url('img/puzzle/puzzleBg.png') no-repeat center center / cover;
+}
+
+.piece {
+  position: absolute;
+  cursor: grab;
+  user-select: none;
+  z-index: 2;
+  /* 퍼즐 조각은 기본적으로 위에 있도록 설정 */
+  transition: transform 0.1s;
+}
+
+.dragging {
+  z-index: 10;
+  /* 드래그 중인 조각은 가장 위로 */
+  opacity: 0.8;
+}
+
+.correct {
+  z-index: 1;
+  /* 맞춘 조각은 가장 아래로 */
+  pointer-events: none;
+  /* 더 이상 드래그 불가 */
+}
+
+@keyframes pzError {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  25% {
+    transform: translate(-10px, 0);
+  }
+
+  50% {
+    transform: translate(10px, 0);
+  }
+
+  75% {
+    transform: translate(-10px, 0);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+.pzError {
+  animation: pzError 0.3s;
 }

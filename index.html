@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 
 <html lang="ko">
-
-<head>
-  <meta charset="UTF-8" />
-  <title>Code 404: Themepark</title>
-  <link rel="stylesheet" href="index.css" />
-  <link rel="stylesheet" href="animation.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+  rel="stylesheet">
+<link rel="stylesheet" href="index.css">
 </head>
 
 <body>
@@ -29,7 +23,6 @@
 
   <img class="StartHover hidden" src="img/start_hover.png" alt="start_hover background">
 
-  ```
   <!-- 시스템 프레임 (오류 전/후 모두 사용) -->
   <div class="SystemFrame hidden">
     <!-- 오류 메시지 출력용 -->
@@ -37,12 +30,14 @@
     <!-- 오류 후 호버 시 메시지 출력용 -->
     <div class="SystemMessage hidden"></div>
     <div class="errorMessage hidden"></div>
+
+    <div class="YorN hidden">
+      <button id="YES">YES</button>
+      <button id="NO">NO</button>
+    </div>
   </div>
 
-  <div class="YorN hidden">
-    <button id="YES">YES</button>
-    <button id="NO">NO</button>
-  </div>
+  <div id="blackBg" class="hidden"></div>
 
 
   <div id="timer" class="hidden">10:00</div>
@@ -140,7 +135,7 @@
   <!-- 글리치 캔버스 -->
   <canvas id="glitch-layer"></canvas>
 
-  <div id="puzzleBoard"></div>
+  <div class="puzzleBoard hidden"></div>
 
   <div class="gameOver hidden">
     <div id="m1" class="hidden">&gt;&gt;&gt; >>> FATAL ERROR: System integrity check failed at 0x0047:000C &lt;&lt;&lt;</div>
