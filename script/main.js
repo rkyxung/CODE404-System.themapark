@@ -87,51 +87,6 @@ function main() {
     getIsErrorState: () => ErrorValue
   });
 
-  // 🌟 URL 파라미터에서 stage 값 확인 (예: ?stage=2)
-  const params = new URLSearchParams(window.location.search);
-  const stage = params.get("stage");
-
-  if (stage === "1") {
-    console.log("URL → 퍼즐1 바로 진입");
-    document.querySelector(".Error_officeInside") ?.classList.remove("hidden");
-    puzzle01once = true;
-    currentPuzzle = 2;
-    puzzle01(() => {});
-    return; // 이후 Puzzle() 중복 실행 방지
-  }
-
-  if (stage === "2") {
-    console.log("URL → 퍼즐2 바로 진입");
-    document.querySelector(".Error_officeInside") ?.classList.remove("hidden");
-    document.querySelector(".dark") ?.classList.remove("hidden");
-    puzzle02once = true;
-    currentPuzzle = 3;
-    puzzle02(() => {});
-    return;
-  }
-
-  if (stage === "3") {
-    console.log("URL → 퍼즐3 바로 진입");
-    document.querySelector(".Computer_puzzle03") ?.classList.remove("hidden");
-    puzzle03once = true;
-    currentPuzzle = 4;
-    puzzle03(() => {});
-    return;
-  }
-
-  if (stage === "4") {
-    console.log("URL → 퍼즐4 바로 진입");
-    document.querySelector(".puzzleBoard") ?.classList.remove("hidden");
-    document.querySelector(".Themepark")?.classList.add("hidden");
-    document.querySelector(".StartScene")?.classList.add("hidden");
-    document.querySelector(".SystemFrame")?.classList.remove("hidden");
-    puzzle04once = true;
-    currentPuzzle = 5;
-    puzzle04(() => {});
-    return;
-  }
-
-
   Puzzle();
 }
 

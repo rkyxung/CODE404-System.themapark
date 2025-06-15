@@ -2,11 +2,19 @@ import {
   textType
 } from "./textType.js";
 
+export const monitorEffect = new Audio("sounds/monitor_off.mp3"); // 모니터 효과음
+
 export function gameOver() {
   const gameOver = document.querySelector(".gameOver");
   const overEnding = document.querySelector(".endingOver");
   const topCover = document.getElementById("topCover");
-  const bottomCover = document.getElementById("bottomCover");
+  const gameOverBgm = new Audio("sounds/gameoverBgm.mp3"); // 게임 오버 배경음악
+  const gameOverBgm2 = new Audio("sounds/gameover_beep.mp3"); // 게임 오버 배경음악 2
+  gameOverBgm2.volume = 0.5;
+
+  const errorBgm = new Audio("sounds/glitch_noise.mp3"); // 오류 배경음악
+  errorBgm.volume = 1; // 오류 배경음악 볼륨 조정
+  errorBgm.loop = true; // 오류 배경음악 반복 재생 설정
 
   const gameOverMessages = [
     document.getElementById("m1"),
@@ -187,8 +195,7 @@ export function gameOver() {
     },
   ]
 
-  const gameOver04 = [
-    {
+  const gameOver04 = [{
       text: "> 우리와 하나가 된다니, 좋지 않습니까?",
     },
     {
@@ -199,13 +206,16 @@ export function gameOver() {
   let delay = 0; //setTimeout 시간 조절 함수
 
 
-  document.querySelector(".Error_themepark")?.classList.add("hidden");
-  document.querySelector(".Error_office")?.classList.add("hidden");
-  document.querySelector(".Error_officeInside")?.classList.add("hidden");
-  document.querySelector(".Computer_puzzle03")?.classList.add("hidden");
-  document.querySelector(".locker_view")?.classList.add("hidden");
-  document.querySelector("#puzzleBoard")?.classList.add("hidden");
+  document.querySelector(".Error_themepark") ?.classList.add("hidden");
+  document.querySelector(".Error_office") ?.classList.add("hidden");
+  document.querySelector(".Error_officeInside") ?.classList.add("hidden");
+  document.querySelector(".Computer_puzzle03") ?.classList.add("hidden");
+  document.querySelector(".locker_view") ?.classList.add("hidden");
+  document.querySelector("#puzzleBoard") ?.classList.add("hidden");
   gameOver.classList.remove("hidden");
+
+  gameOverBgm.play(); // 게임 오버 배경음악 재생
+  errorBgm.play(); // 오류 배경음악 재생
 
   for (let i = 0; i < gameOverMessages.length; i++) {
     document.querySelector(".SystemMessage").classList.add("hidden");
@@ -215,22 +225,26 @@ export function gameOver() {
 
     delay += Math.max(120 - i * 3, 1);
   }
+
   setTimeout(() => {
+    
     gameOver.style.opacity = '0.2';
     overEnding.classList.remove("hidden");
     overEnding.innerText = "";
     textType(gameOver01, overEnding, () => {
       textType(gameOver02, overEnding, () => {
         textType(gameOver03, overEnding, () => {
-          textType(gameOver04, overEnding, () => {
-          }, 1500)
+          textType(gameOver04, overEnding, () => {}, 1500)
         }, 1500)
       }, 1500)
     }, 1500)
 
     setTimeout(() => {
+      errorBgm.pause(); // 오류 배경음악 일시 정지
       topCover.classList.add("slideDown");
       bottomCover.classList.add("slideUp");
+      monitorEffect.play(); // 모니터 효과음 재생
+      gameOverBgm2.play(); // 게임 오버 배경음악 2 재생
     }, 46000);
   }, 4000);
 }

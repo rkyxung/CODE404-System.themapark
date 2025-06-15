@@ -530,8 +530,8 @@ body {
 
 #modal_flowchart {
   position: absolute;
-  top: 57vh;
-  left: 50vw;
+  top: 67vh;
+  left: 60vw;
   width: 25vw;
   height: auto;
   transform: translate(-50%, -50%);

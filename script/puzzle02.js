@@ -14,6 +14,19 @@ import {
   deepGlitch
 } from "./deepGlitch.js";
 
+import {
+  wrongEffect
+} from "./puzzle01.js";
+
+import {
+  successEffect
+} from "./puzzle01.js";
+
+
+export const electricBtn = new Audio("sounds/electricBtn.mp3"); // 전기 버튼 효과음
+
+const keydownEffect = new Audio("sounds/clickBgm.mp3"); // 키보드 입력 효과음
+
 export function puzzle02(onComplete) {
   const officeIn = document.querySelector(".Error_officeInside");
   const dark = document.querySelector(".dark");
@@ -165,9 +178,11 @@ export function puzzle02(onComplete) {
 
       //includes(): 문자열에 특정 문자가 "포함되어 있는지"를 확인하는 함수
       if (btn.src.includes("btn_down.png")) {
+        electricBtn.play(); // 버튼 클릭 시 효과음 재생
         btn.src = "img/OFFICE/btn_up.png";
         pswd02 += num;
       } else {
+        electricBtn.play(); // 버튼 클릭 시 효과음 재생
         btn.src = "img/OFFICE/btn_down.png";
         pswd02 = pswd02.slice(0, -1); // 마지막 문자 제거
       }
@@ -176,6 +191,7 @@ export function puzzle02(onComplete) {
       if (pswd02.length === 3) {
         if (pswd02 === "124") {
           setTimeout(() => {
+            successEffect.play(); // 성공 효과음 재생
             message.innerText = "전류 경로 일치. 회로 복구 완료. \n관리실 조명이 점등되었습니다.";
             answer02 = true;
             setTimeout(() => {
@@ -188,6 +204,7 @@ export function puzzle02(onComplete) {
         } else {
           setTimeout(() => {
             message.innerText = "순서 오류. 전류 흐름 불안정. \n회로를 초기화합니다.";
+            wrongEffect.play(); // 오답 효과음 재생
             message.classList.add("shake");
             timer.classList.add("shake");
             electricWrapper.classList.add("electricShake");
@@ -256,17 +273,27 @@ export function puzzle02(onComplete) {
       document.addEventListener("keydown", (e) => {
         //백스페이스 누르면 지우기
         if (e.key === "Backspace") {
+          keydownEffect.play(); // 키보드 입력 효과음 재생
+          setTimeout(() => {
+            keydownEffect.pause(); // 효과음 일시 정지
+            keydownEffect.currentTime = 0; // 효과음 초기화
+          }, 500);
           pswd03 = pswd03.slice(0, -1);
           computerPswd.innerText = "password: " + pswd03;
         }
         //키보드 한글짜리만 가능
         //7일 때 하나 더 누를 수 있기 때문에 8일 때의 if문문을 안에 넣어야 함
         if (pswd03.length < 8 && e.key.length === 1) {
+          keydownEffect.play(); // 키보드 입력 효과음 재생
+          setTimeout(() => {
+            keydownEffect.pause(); // 효과음 일시 정지
+            keydownEffect.currentTime = 0; // 효과음 초기화
+          }, 500);
           pswd03 += e.key;
-          computerPswd.innerText += e.key;
-
+          computerPswd.innerText += e.key
           if (pswd03.length === 8) {
             if (pswd03 === "20110517") {
+              successEffect.play(); // 성공 효과음 재생
               computerMessage.innerText = "CORRECT";
               answer03 = true;
               setTimeout(() => {
@@ -305,6 +332,7 @@ export function puzzle02(onComplete) {
             } else {
               message.classList.remove("hidden");
               message.innerText = "인증 실패. 코드 재확인 필요.";
+              wrongEffect.play(); // 오답 효과음 재생
               computerBg.classList.add("shake");
               computerFront.classList.add("shake");
               computerKeyboard.classList.add("shake");

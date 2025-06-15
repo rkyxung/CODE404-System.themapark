@@ -7,6 +7,20 @@ import {
 import {
   deepGlitch
 } from "./deepGlitch.js";
+import {
+  errorThemeparkBgm
+} from "./start.js";
+
+
+
+export const wrongEffect = new Audio("sounds/wrong_answer.mp3"); // 오답 효과음
+export const successEffect = new Audio("sounds/success_answer.mp3"); // 성공 효과음
+
+export const glitchBgm = new Audio("sounds/glitch_noise.mp3"); // 글리치 효과음
+
+ 
+const officePswdEffect = new Audio("sounds/office_pswd.mp3"); // 비밀번호 입력 사운드
+officePswdEffect.volume = 0.6; // 비밀번호 입력 사운드 볼륨 조정
 
 export function puzzle01(onComplete) {
   const ErrorThemepark = document.querySelector(".Error_themepark");
@@ -26,6 +40,10 @@ export function puzzle01(onComplete) {
 
   let pswd = "";
   let answer = false;
+
+  glitchBgm.loop = true; // 글리치 효과음 반복 재생
+
+
 
   ErrorOfficeBg.addEventListener("click", () => {
     ErrorOffice.classList.add("hidden");
@@ -78,10 +96,12 @@ export function puzzle01(onComplete) {
       if (pswd.length < 4) {
         pswd += number.dataset.num;
         message.innerText += number.dataset.num;
+        officePswdEffect.play(); // 비밀번호 입력 사운드 재생
       }
 
       if (pswd.length === 4) {
         if (pswd === "0817") {
+          successEffect.play(); // 성공 효과음 재생
           setTimeout(() => {
             message.innerText = "인증 성공. \n보안 구역 접근 권한이 부여됩니다.";
 
@@ -98,6 +118,7 @@ export function puzzle01(onComplete) {
             message.classList.add("shake");
             modalPassword.classList.add("shake");
             timer.classList.add("shake");
+            wrongEffect.play(); // 오답 효과음 재생
 
             setTimeout(() => {
               wrongTime(10);
@@ -121,6 +142,8 @@ export function puzzle01(onComplete) {
   open.addEventListener("click", () => {
     ErrorOffice.classList.add("hidden");
     inside.classList.remove("hidden");
+    errorThemeparkBgm.pause(); // 오류 테마파크 배경음악 일시 정지
+    glitchBgm.play(); // 글리치 효과음 재생
 
     setTimeout(() => {
       message.classList.remove("hidden");

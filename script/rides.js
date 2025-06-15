@@ -2,6 +2,10 @@ import {
   glitch
 } from './glitch.js';
 
+import {
+  errorThemeparkBgm
+} from './start.js';
+
 
 export function ridesMessage(getIsErrorState) {
   const Themepark = document.querySelector(".Themepark");
@@ -102,6 +106,7 @@ export function ridesMessage(getIsErrorState) {
 
     // 마우스를 올렸을 때 실행
     element.addEventListener("click", () => {
+
       if (!getIsErrorState()) return; // 오류 상태가 아니면 무시
       Message.innerText = ride.message; // 메시지 텍스트 설정
         Message.classList.remove("hidden"); // 메시지 박스 보이기

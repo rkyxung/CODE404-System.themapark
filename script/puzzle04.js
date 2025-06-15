@@ -21,6 +21,15 @@ import {
   stopTimer
 } from "./timer.js"
 
+import {
+  successEffect
+} from "./puzzle01.js";
+
+import {
+  ThemeparkBgm
+} from "./start.js";
+
+import { monitorEffect } from "./gameOver.js";
 
 export function puzzle04(onComplete) {
   const board = document.querySelector(".puzzleBoard");
@@ -478,11 +487,14 @@ export function puzzle04(onComplete) {
       }
 
       if (correctCount === totalPieces) { // 모든 퍼즐을 맞춘 경우
+        successEffect.play(); // 성공 효과음 재생
         board.classList.add("hidden"); // 퍼즐 보드 숨김
-        errorThemepark.classList.remove("hidden"); // 오류 테마파크 다시 보여짐 (연출용)
+        errorThemepark.classList.remove("hidden"); // 오류 테마파크 다시 보여짐
         stopGlitch(); // 글리치 멈춤
         stopDeepGlitch(); // 딥 글리치 멈춤
         setTimeout(() => {
+          ThemeparkBgm.play();
+          ThemeparkBgm.volume = 0.4; // 테마파크 배경음악 볼륨 조정
           errorThemepark.classList.add("hidden"); // 오류 테마파크 숨김
           Themepark.classList.remove("hidden"); // 정상 테마파크 표시
           stopTimer(); // 타이머 멈춤
@@ -517,6 +529,8 @@ export function puzzle04(onComplete) {
                 setTimeout(() => {
                   topCover.classList.add("slideDown");
                   bottomCover.classList.add("slideUp");
+                  monitorEffect.play(); // 모니터 효과음 재생
+                  ThemeparkBgm.pause(); // 테마파크 배경음악 일시 정지
                 }, 41500);
               }, 1000)
             })
@@ -538,6 +552,8 @@ export function puzzle04(onComplete) {
                 setTimeout(() => {
                   topCover.classList.add("slideDown");
                   bottomCover.classList.add("slideUp");
+                  monitorEffect.play(); // 모니터 효과음 재생
+                  ThemeparkBgm.pause(); // 테마파크 배경음악 일시 정지
                 }, 41500);
               }, 500);
             })

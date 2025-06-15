@@ -1,5 +1,9 @@
 import { gameOver } from "./gameOver.js";
 
+import { errorThemeparkBgm } from "./start.js";
+
+import { glitchBgm } from "./puzzle01.js";
+
 let Timer = 0; // 전체 남은 시간
 let countdown = null;
 let timerBox = null;
@@ -35,6 +39,10 @@ export function timer(time) {
       timerBox.classList.add("hidden");
       setTimeout(() => {
         systemMessage.classList.remove("shake");
+        errorThemeparkBgm.pause(); // 테마파크 배경음악 중지
+        glitchBgm.pause(); // 글리치 효과음 중지
+
+        
         gameOver();
       }, 3000); // 2초 후 메시지 숨김
       

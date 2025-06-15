@@ -14,6 +14,14 @@ import {
   glitch
 } from "./glitch.js";
 
+
+export const errorThemeparkBgm = new Audio("sounds/errorThemepark.mp3"); // 오류 테마파크 배경음악
+errorThemeparkBgm.loop = true; // 오류 테마파크 배경음악 반복 재생 설정
+
+export  const ThemeparkBgm = new Audio("sounds/Themepark.mp3"); // 오디오 경로 설정
+ThemeparkBgm.loop = true; // 배경음악 반복 재생 설정
+
+
 // 게임 시작 버튼 클릭 → 메시지 순차 출력 및 오류 상태 진입
 export function startGame({
   onError,
@@ -110,6 +118,16 @@ export function startGame({
   let ErrorValue = false;
   let i = 0; // 메시지 인덱스를 0부터 시작 (몇 번째 메시지를 출력할지 추적) //클릭이벤트 밖으로 빼야 됨
 
+  // 오디오 변수
+  const ThemeparkBgm = new Audio("sounds/Themepark.mp3"); // 오디오 경로 설정
+  ThemeparkBgm.loop = true; // 배경음악 반복 재생 설정
+
+  const errorEffect = new Audio("sounds/error_first.mp3"); // 오류 효과음
+  errorEffect.loop = true; // 오류 효과음 반복 재생 설정
+  errorEffect.volume = 0.7; // 오류 효과음 볼륨 설정
+
+
+
   StartBtn.addEventListener("mouseover", () => {
     Themepark.classList.add("hidden");
     StartHover.classList.remove("hidden");
@@ -122,7 +140,7 @@ export function startGame({
     HoverText.classList.remove("hover");
   })
 
-  
+
   StartBtn.addEventListener("click", () => {
     StartScene.classList.add("hidden");
     SystemFrame.classList.remove("hidden");
@@ -135,6 +153,7 @@ export function startGame({
     textType(introMessage, intro, () => {
       SystemFrame.classList.add("hidden");
       Themepark.classList.remove("hidden");
+      ThemeparkBgm.play(); // 테마파크 오디오 재생
       setTimeout(() => {
         SystemFrame.classList.remove("hidden");
         textType(WelcomeMessage, intro, () => {
@@ -145,6 +164,8 @@ export function startGame({
     });
 
     yes.addEventListener("click", () => {
+      errorEffect.play(); // 오류 효과음 재생
+      ThemeparkBgm.pause(); // 테마파크 오디오 일시 정지
       Themepark.classList.add("hidden");
       YorN.classList.add("hidden");
       intro.classList.add("hidden");
@@ -162,6 +183,8 @@ export function startGame({
             glitch();
             setTimeout(() => {
               Message.classList.add("hidden");
+              errorEffect.pause(); // 오류 효과음 일시 정지
+              errorThemeparkBgm.play(); // 오류 테마파크 배경음악 재생
             }, 600)
           })
         }, 500);
@@ -170,5 +193,5 @@ export function startGame({
 
   })
 
-  
+
 }
