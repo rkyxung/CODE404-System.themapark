@@ -122,7 +122,7 @@ export function startGame({
     HoverText.classList.remove("hover");
   })
 
-  // [3] 게임 시작 버튼 클릭 시 처리
+  
   StartBtn.addEventListener("click", () => {
     StartScene.classList.add("hidden");
     SystemFrame.classList.remove("hidden");

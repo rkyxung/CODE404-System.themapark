@@ -4,7 +4,9 @@ import {
 import {
   glitch
 } from "./glitch.js";
-import { deepGlitch } from "./deepGlitch.js";
+import {
+  deepGlitch
+} from "./deepGlitch.js";
 
 export function puzzle01(onComplete) {
   const ErrorThemepark = document.querySelector(".Error_themepark");
@@ -20,6 +22,7 @@ export function puzzle01(onComplete) {
   const open = document.querySelector(".open");
   const inside = document.querySelector(".Error_officeInside");
   const door = document.getElementById("door");
+  const timer = document.getElementById("timer");
 
   let pswd = "";
   let answer = false;
@@ -27,21 +30,18 @@ export function puzzle01(onComplete) {
   ErrorOfficeBg.addEventListener("click", () => {
     ErrorOffice.classList.add("hidden");
     ErrorThemepark.classList.remove("hidden");
-    message.innerText = "";
-    message.classList.add("hidden");
+    // message.innerText = "";
+    // message.classList.add("hidden");
   })
 
   door.addEventListener("click", () => {
+    message.classList.remove("hidden");
+    message.innerText = "접근 차단됨. \n보안 구역은 인증이 필요합니다."
 
     setTimeout(() => {
-      message.classList.remove("hidden");
-      message.innerText = "접근 차단됨. \n보안 구역은 인증이 필요합니다."
-
-      setTimeout(() => {
-        message.innerText = "";
-        message.classList.add("hidden");
-      }, 1700);
-    }, 0);
+      message.innerText = "";
+      message.classList.add("hidden");
+    }, 1700);
 
   })
 
@@ -95,11 +95,17 @@ export function puzzle01(onComplete) {
         } else {
           setTimeout(() => {
             message.innerText = "인증 실패. \n비밀번호가 일치하지 않습니다.";
+            message.classList.add("shake");
+            modalPassword.classList.add("shake");
+            timer.classList.add("shake");
 
             setTimeout(() => {
               wrongTime(10);
               pswd = "";
               message.innerText = "비밀번호를 입력하십시오. \npassword : ";
+              message.classList.remove("shake");
+              modalPassword.classList.remove("shake");
+              timer.classList.remove("shake");
             }, 1500);
           }, 1000);
         }
@@ -110,23 +116,21 @@ export function puzzle01(onComplete) {
         glitch();
       }
     });
+  });
 
-    open.addEventListener("click", () => {
-      ErrorOffice.classList.add("hidden");
-      inside.classList.remove("hidden");
-      
+  open.addEventListener("click", () => {
+    ErrorOffice.classList.add("hidden");
+    inside.classList.remove("hidden");
+
+    setTimeout(() => {
+      message.classList.remove("hidden");
+      message.innerText = "> 메인 전력 차단됨 \n> 비상 전력으로 전환됨 : 손전등 모드 활성화"
+      console.log("메시지창 열림");
       setTimeout(() => {
-        message.classList.remove("hidden");
-        message.innerText = ">메인 전력 차단됨 \n>비상 전력으로 전환됨 : 손전등 모드 활성화"
-        console.log("메시지창 열림");
-        setTimeout(() => {
-          message.classList.add("hidden");
-          console.log("메시지창 닫힘");
-        }, 1500);
-      }, 500);
-      if (onComplete) onComplete(); //puzzle 스크립트 구분 짓기 위함. 성공했으면 다음 단계로
-    });
-
-
+        message.classList.add("hidden");
+        console.log("메시지창 닫힘");
+      }, 1500);
+    }, 500);
+    if (onComplete) onComplete(); //puzzle 스크립트 구분 짓기 위함. 성공했으면 다음 단계로
   });
 }

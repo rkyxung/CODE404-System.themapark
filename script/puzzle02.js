@@ -35,9 +35,12 @@ export function puzzle02(onComplete) {
   const computerPswd = document.getElementById("computer_password");
   const computerMessage = document.getElementById("computer_message");
   const computerFront = document.getElementById("computer_front");
+  const computerKeyboard = document.getElementById("keyboard");
+  const computerMouse = document.getElementById("mouse");
   const errorMessage = document.querySelector(".errorMessage");
   const glitchLayer = document.getElementById("glitch-layer");
   const ErrorThemepark = document.querySelector(".Error_themepark");
+  const timer = document.getElementById("timer");
 
   const errorDeepening01 = [{
       text: "> UID-037 활동 로그 확인 중",
@@ -117,6 +120,7 @@ export function puzzle02(onComplete) {
   let answer02 = false;
   let answer03 = false;
   const btns = [btn01, btn02, btn03, btn04];
+  let isKeydownEvent = false; // 키보드 이벤트 중복 방지 변수수
 
   document.addEventListener("mousemove", (e) => {
     if (answer02) {
@@ -184,11 +188,16 @@ export function puzzle02(onComplete) {
         } else {
           setTimeout(() => {
             message.innerText = "순서 오류. 전류 흐름 불안정. \n회로를 초기화합니다.";
+            message.classList.add("shake");
+            timer.classList.add("shake");
+            electricWrapper.classList.add("electricShake");
             setTimeout(() => {
               wrongTime(10);
               pswd02 = "";
               message.innerText = "차단기를 올바른 순서대로 작동시키십시오.";
-
+              message.classList.remove("shake");
+              timer.classList.remove("shake"); 
+              electricWrapper.classList.remove("electricShake");
               // 버튼 상태 전부 초기화
               btns.forEach((b) => {
                 b.src = "img/OFFICE/btn_down.png";
@@ -240,75 +249,96 @@ export function puzzle02(onComplete) {
       }, 1700);
     }, 20);
 
-    document.addEventListener("keydown", (e) => {
-      //백스페이스 누르면 지우기
-      if (e.key === "Backspace") {
-        pswd03 = pswd03.slice(0, -1);
-        computerPswd.innerText = "password: " + pswd03;
-      }
-      //키보드 한글짜리만 가능
-      //7일 때 하나 더 누를 수 있기 때문에 8일 때의 if문문을 안에 넣어야 함
-      if (pswd03.length < 8 && e.key.length === 1) {
-        pswd03 += e.key;
-        computerPswd.innerText += e.key;
+    if (!isKeydownEvent) {
+      isKeydownEvent = true;
 
-        if (pswd03.length === 8) {
-          if (pswd03 === "20110517") {
-            computerMessage.innerText = "CORRECT";
-            computerMessage.style.left = "35vw";
-            answer03 = true;
-            setTimeout(() => {
-              message.classList.remove("hidden");
-              message.innerText = "인증 완료. UID-037의 관리자 권한이 활성화되었습니다. \n해당 경로는 일반 사용자의 접근 대상이 아닙니다.";
+
+      document.addEventListener("keydown", (e) => {
+        //백스페이스 누르면 지우기
+        if (e.key === "Backspace") {
+          pswd03 = pswd03.slice(0, -1);
+          computerPswd.innerText = "password: " + pswd03;
+        }
+        //키보드 한글짜리만 가능
+        //7일 때 하나 더 누를 수 있기 때문에 8일 때의 if문문을 안에 넣어야 함
+        if (pswd03.length < 8 && e.key.length === 1) {
+          pswd03 += e.key;
+          computerPswd.innerText += e.key;
+
+          if (pswd03.length === 8) {
+            if (pswd03 === "20110517") {
+              computerMessage.innerText = "CORRECT";
+              answer03 = true;
               setTimeout(() => {
-                computerFront.src = "img/OFFICE/computer_front_black.png";
-                message.classList.add("hidden");
-                computerPswd.classList.add("hidden");
-                computerMessage.classList.add("hidden");
-                computerView.classList.add("zoom_computer");
+                message.classList.remove("hidden");
+                message.innerText = "인증 완료. UID-037의 관리자 권한이 활성화되었습니다. \n해당 경로는 일반 사용자의 접근 대상이 아닙니다.";
                 setTimeout(() => {
-                  errorMessage.classList.remove("hidden");
+                  computerFront.src = "img/OFFICE/computer_front_black.png";
+                  message.classList.add("hidden");
+                  computerPswd.classList.add("hidden");
+                  computerMessage.classList.add("hidden");
+                  computerView.classList.add("zoom_computer");
+                  setTimeout(() => {
+                    errorMessage.classList.remove("hidden");
 
-                  textType(errorDeepening01, errorMessage, () => {
-                    setTimeout(() => {
-                      textType(errorDeepening02, errorMessage);
+                    textType(errorDeepening01, errorMessage, () => {
                       setTimeout(() => {
-                        glitchLayer.classList.add("shake");
-                        errorMessage.classList.add("shake");
+                        textType(errorDeepening02, errorMessage);
                         setTimeout(() => {
-                          glitchLayer.classList.remove("shake");
-                          errorMessage.classList.remove("shake");
-                          errorMessage.classList.add("hidden");
-                          computerView.classList.add("hidden");
-                          ErrorThemepark.classList.remove("hidden");
-                          if (onComplete) onComplete(); //puzzle 스크립트 구분 짓기 위함. 성공했으면 다음 단계로
-                          deepGlitch();
-                        }, 3000);
-                      }, 8000);
-                    }, 3000); // ✅ 여기: 첫 메시지 끝나고 2초 후에 다음 메시지 출력
-                  }, 2500); // ✅ 여기: 첫 메시지 타이핑 속도 (글자당 2000ms 아님, 2초 아님 → 글자당 2초가 되어버림!)
-                }, 1500); // ✅ 메시지 박스를 3초 후에 열기
+                          glitchLayer.classList.add("shake");
+                          errorMessage.classList.add("shake");
+                          setTimeout(() => {
+                            glitchLayer.classList.remove("shake");
+                            errorMessage.classList.remove("shake");
+                            errorMessage.classList.add("hidden");
+                            computerView.classList.add("hidden");
+                            ErrorThemepark.classList.remove("hidden");
+                            if (onComplete) onComplete(); //puzzle 스크립트 구분 짓기 위함. 성공했으면 다음 단계로
+                            deepGlitch();
+                          }, 3000);
+                        }, 8000);
+                      }, 3000); 
+                    }, 2500); 
+                  }, 1500); 
+                }, 1500);
+              }, 500);
+            } else {
+              message.classList.remove("hidden");
+              message.innerText = "인증 실패. 코드 재확인 필요.";
+              computerBg.classList.add("shake");
+              computerFront.classList.add("shake");
+              computerKeyboard.classList.add("shake");
+              computerMouse.classList.add("shake");
+              computerMessage.classList.add("electricShake");
+              computerPswd.classList.add("electricShake");
+              message.classList.add("shake");
+              timer.classList.add("shake");
+              setTimeout(() => {
+                wrongTime(10);
+                pswd03 = "";
+                computerPswd.innerText = "password: ";
+                message.classList.add("hidden");
+                message.classList.remove("shake");
+                timer.classList.remove("shake");
+                computerBg.classList.remove("shake");
+                computerFront.classList.remove("shake");
+                computerKeyboard.classList.remove("shake");
+                computerMouse.classList.remove("shake");
+                computerMessage.classList.remove("electricShake");
+                computerPswd.classList.remove("electricShake");
+
               }, 1500);
-            }, 500);
-          } else {
-            message.classList.remove("hidden");
-            message.innerText = "인증 실패. 코드 재확인 필요.";
-            setTimeout(() => {
-              wrongTime(10);
-              pswd03 = "";
-              computerPswd.innerText = "password: ";
-              message.classList.add("hidden");
-            }, 500);
+            }
           }
         }
-      }
-    })
+      })
+    };
   });
 
   computerBg.addEventListener("click", () => {
     computerView.classList.add("hidden");
     officeIn.classList.remove("hidden");
-    
+
   });
 
 

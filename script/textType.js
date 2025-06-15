@@ -1,8 +1,9 @@
 export function textType(messages, targetSystem, onComplete) {
 
+  // Chat gpt의 도움을 받은 부분입니다.
   const system = typeof targetSystem === "string"
-  ? document.querySelector(targetSystem) // 👉 targetSystem이 문자열이면
-  : targetSystem;                        // 👉 문자열이 아니면 (즉, DOM 요소면) 그대로 사용
+  ? document.querySelector(targetSystem) // targetSystem이 문자열이면
+  : targetSystem;                        // 문자열이 아니면 (즉, DOM 요소면) 그대로 사용
 
   // const system = document.querySelector(".SystemMessage");
 
@@ -69,7 +70,7 @@ export function textType(messages, targetSystem, onComplete) {
         });
       }
     } else {
-      // ✅ 여기!!: 모든 메시지 출력이 끝났을 때 onComplete 실행
+
       if (typeof onComplete === 'function') {
         onComplete();
       }

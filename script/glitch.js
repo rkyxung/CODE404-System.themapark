@@ -1,6 +1,7 @@
+// Chat gpt의 도움을 받은 부분입니다. glitch.js는 전반적으로 gpt의 도움에 의해 작성되었습니다.
 let glitchInterval = null;
 
-// ✅ [4] 글리치 효과 함수
+// 글리치 효과 함수
 export function glitch() {
   const canvas = document.getElementById("glitch-layer"); // HTML에서 id가 'glitch-layer'인 캔버스를 선택
   const ctx = canvas.getContext("2d"); // 캔버스에서 2D 그래픽을 그리기 위한 도구를 가져옴
@@ -60,7 +61,7 @@ export function glitch() {
       const x = Math.random() * canvas.width; // 잘라낼 x 위치 무작위 설정
       const y = Math.random() * canvas.height; // 잘라낼 y 위치 무작위 설정
       const w = Math.random() * 80 + 30; // 잘라낼 너비 무작위 설정 (30~110px)
-      const h = Math.random() * 6 + 10; // 잘라낼 높이 무작위 설정 (10~16px)
+      const h = Math.random() * 6 + 15; // 잘라낼 높이 무작위 설정 (10~16px)
       ctx.drawImage(canvas, x, y, w, h, x + (Math.random() * 20 - 10), y, w, h); // 잘라낸 이미지 조각을 좌우로 살짝 흔들어 다시 그림
     }
   }

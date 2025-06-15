@@ -4,8 +4,9 @@ import {
 
 export function gameOver() {
   const gameOver = document.querySelector(".gameOver");
-  const errorMessage = document.querySelector(".SystemMessage");
-  const blackBg = document.getElementById("blackBg");
+  const overEnding = document.querySelector(".endingOver");
+  const topCover = document.getElementById("topCover");
+  const bottomCover = document.getElementById("bottomCover");
 
   const gameOverMessages = [
     document.getElementById("m1"),
@@ -91,22 +92,22 @@ export function gameOver() {
       text: " ",
       isDot: false
     },
-    {
-      text: "> 이건 더 이상 오류가 아니었습니다.",
-      isDot: false
-    },
-    {
-      text: "> **의도된 환경**이었죠.",
-      isDot: false
-    },
-    {
-      text: "> 처음부터 UID-037이 머무를 곳으로 정의된,",
-      isDot: false
-    },
-    {
-      text: "> 완전한 회로였습니다.",
-      isDot: false
-    },
+    // {
+    //   text: "> 이건 더 이상 오류가 아니었습니다.",
+    //   isDot: false
+    // },
+    // {
+    //   text: "> **의도된 환경**이었죠.",
+    //   isDot: false
+    // },
+    // {
+    //   text: "> 처음부터 UID-037이 머무를 곳으로 정의된,",
+    //   isDot: false
+    // },
+    // {
+    //   text: "> 완전한 회로였습니다.",
+    //   isDot: false
+    // },
 
   ]
 
@@ -184,10 +185,6 @@ export function gameOver() {
       text: "",
       isDot: false
     },
-    {
-      text: "> 우리와 하나가 된다니, 좋지 않습니까?",
-      isDot: false
-    },
   ]
 
   const gameOver04 = [
@@ -211,7 +208,7 @@ export function gameOver() {
   gameOver.classList.remove("hidden");
 
   for (let i = 0; i < gameOverMessages.length; i++) {
-    errorMessage.classList.add("hidden");
+    document.querySelector(".SystemMessage").classList.add("hidden");
     setTimeout(() => {
       gameOverMessages[i].classList.remove("hidden");
     }, delay);
@@ -219,18 +216,21 @@ export function gameOver() {
     delay += Math.max(120 - i * 3, 1);
   }
   setTimeout(() => {
-    gameOver.style.opacity = '0.3';
-    document.querySelector(".SystemFrame").classList.remove("hidden");
-    errorMessage.classList.remove("hidden");
-    textType(gameOver01, errorMessage, () => {
-      textType(gameOver02, errorMessage, () => {
-        textType(gameOver03, errorMessage, () => {
-          textType(gameOver04, errorMessage, () => {
-
+    gameOver.style.opacity = '0.2';
+    overEnding.classList.remove("hidden");
+    overEnding.innerText = "";
+    textType(gameOver01, overEnding, () => {
+      textType(gameOver02, overEnding, () => {
+        textType(gameOver03, overEnding, () => {
+          textType(gameOver04, overEnding, () => {
           }, 1500)
         }, 1500)
       }, 1500)
     }, 1500)
 
+    setTimeout(() => {
+      topCover.classList.add("slideDown");
+      bottomCover.classList.add("slideUp");
+    }, 46000);
   }, 4000);
 }

@@ -29,10 +29,14 @@ export function puzzle04(onComplete) {
   const errorThemepark = document.querySelector(".Error_themepark");
   const Themepark = document.querySelector(".Themepark");
   const timer = document.getElementById("timer");
-  const YorN = document.querySelector(".YorN");
-  const Yes = document.getElementById("YES");
-  const No = document.getElementById("NO");
+  const YorN = document.querySelector(".endingYorN");
+  const Yes = document.getElementById("endingYES");
+  const No = document.getElementById("endingNO");
   const blackBg = document.getElementById("blackBg");
+  const noClick = document.getElementById("noClick");
+  const winEnding = document.querySelector(".endingWin");
+  const topCover = document.getElementById("topCover");
+  const bottomCover = document.getElementById("bottomCover");
 
   const WinEnd = [{
     text: "> 사용자 세션 종료 중",
@@ -105,22 +109,22 @@ export function puzzle04(onComplete) {
       text: " ",
       isDot: false
     },
-    {
-      text: "> 이건 더 이상 오류가 아니었습니다.",
-      isDot: false
-    },
-    {
-      text: "> **의도된 환경**이었죠.",
-      isDot: false
-    },
-    {
-      text: "> 처음부터 UID-037이 머무를 곳으로 정의된,",
-      isDot: false
-    },
-    {
-      text: "> 완전한 회로였습니다.",
-      isDot: false
-    },
+    // {
+    //   text: "> 이건 더 이상 오류가 아니었습니다.",
+    //   isDot: false
+    // },
+    // {
+    //   text: "> **의도된 환경**이었죠.",
+    //   isDot: false
+    // },
+    // {
+    //   text: "> 처음부터 UID-037이 머무를 곳으로 정의된,",
+    //   isDot: false
+    // },
+    // {
+    //   text: "> 완전한 회로였습니다.",
+    //   isDot: false
+    // },
 
   ]
 
@@ -410,135 +414,145 @@ export function puzzle04(onComplete) {
     }
   ];
 
-  let correctCount = 0;
-  const totalPieces = pieceData.length;
+  let correctCount = 0; // 맞춘 퍼즐 개수 초기값
+  const totalPieces = pieceData.length; // 전체 퍼즐 조각 개수
 
-  pieceData.forEach(piece => {
-    const img = document.createElement("img");
-    img.src = `img/puzzle/${piece.src}.png`;
-    img.className = "piece";
-    img.style.width = `${piece.w}vw`;
-    img.style.height = `${piece.h}vh`;
-    img.style.left = `${Math.random() * 80}vw`;
-    img.style.top = `${Math.random() * 80}vh`;
-    img.dataset.correctX = piece.x;
-    img.dataset.correctY = piece.y;
-    board.appendChild(img);
+  // 퍼즐 보드 문제 일부분 Chat gpt의 도움을 받았습니다.
+
+  pieceData.forEach(piece => { // 각 퍼즐 조각마다 이미지 요소 생성 및 설정
+    const img = document.createElement("img"); // 이미지 요소 생성
+    img.src = `img/puzzle/${piece.src}.png`; // 이미지 경로 설정
+    img.className = "piece"; // 클래스명 설정
+    img.style.width = `${piece.w}vw`; // 퍼즐 너비 설정
+    img.style.height = `${piece.h}vh`; // 퍼즐 높이 설정
+    img.style.left = `${Math.random() * 80}vw`; // 퍼즐 x위치 랜덤 설정
+    img.style.top = `${Math.random() * 80}vh`; // 퍼즐 y위치 랜덤 설정
+    img.dataset.correctX = piece.x; // 올바른 x좌표 저장
+    img.dataset.correctY = piece.y; // 올바른 y좌표 저장
+    board.appendChild(img); // 퍼즐 보드에 추가
   });
 
   setTimeout(() => {
-    errorThemepark.classList.add("hidden");
-    board.classList.remove("hidden");
-  }, 20)
+    errorThemepark.classList.add("hidden"); // 오류 테마파크 숨김
+    board.classList.remove("hidden"); // 퍼즐 보드 표시
+  }, 20); // 약간의 지연 후 퍼즐 시작
 
   let dragging = null,
     offsetX = 0,
-    offsetY = 0;
+    offsetY = 0; // 드래그 상태 및 오프셋 초기화
 
-  board.addEventListener("mousedown", (e) => {
-    if (!e.target.classList.contains("piece")) return;
-    dragging = e.target;
-    dragging.classList.add("dragging");
-    const rect = dragging.getBoundingClientRect();
-    offsetX = e.clientX - rect.left;
-    offsetY = e.clientY - rect.top;
+  board.addEventListener("mousedown", (e) => { // 마우스 누르면 드래그 시작
+    if (!e.target.classList.contains("piece")) return; // 퍼즐 조각이 아니면 무시
+    dragging = e.target; // 드래그할 대상 설정
+    dragging.classList.add("dragging"); // 드래깅 중 클래스 추가
+    const rect = dragging.getBoundingClientRect(); // 퍼즐 위치 계산
+    offsetX = e.clientX - rect.left; // 마우스 x 위치 보정
+    offsetY = e.clientY - rect.top; // 마우스 y 위치 보정
   });
 
-  board.addEventListener("mousemove", (e) => {
-    if (!dragging) return;
-    const boardRect = board.getBoundingClientRect();
-    const x = ((e.clientX - boardRect.left - offsetX) / boardRect.width) * 100;
-    const y = ((e.clientY - boardRect.top - offsetY) / boardRect.height) * 100;
-    dragging.style.left = `${x}vw`;
-    dragging.style.top = `${y}vh`;
+  board.addEventListener("mousemove", (e) => { // 마우스 움직일 때 퍼즐 이동
+    if (!dragging) return; // 드래그 중이 아니면 무시
+    const boardRect = board.getBoundingClientRect(); // 보드 영역 계산
+    const x = ((e.clientX - boardRect.left - offsetX) / boardRect.width) * 100; // 보드 기준 상대 x 계산
+    const y = ((e.clientY - boardRect.top - offsetY) / boardRect.height) * 100; // 보드 기준 상대 y 계산
+    dragging.style.left = `${x}vw`; // 퍼즐 x 위치 이동
+    dragging.style.top = `${y}vh`; // 퍼즐 y 위치 이동
   });
 
-  board.addEventListener("mouseup", () => {
-    if (!dragging) return;
-    const curX = parseFloat(dragging.style.left);
-    const curY = parseFloat(dragging.style.top);
-    const correctX = parseFloat(dragging.dataset.correctX);
-    const correctY = parseFloat(dragging.dataset.correctY);
+  board.addEventListener("mouseup", () => { // 마우스 떼면 퍼즐 위치 체크
+    if (!dragging) return; // 드래그 중이 아니면 무시
+    // parseFloat = 문자열을 숫자형으로 바꿔줌
+    const curX = parseFloat(dragging.style.left); // 현재 퍼즐 x 위치
+    const curY = parseFloat(dragging.style.top); // 현재 퍼즐 y 위치
+    const correctX = parseFloat(dragging.dataset.correctX); // 정답 x 위치
+    const correctY = parseFloat(dragging.dataset.correctY); // 정답 y 위치
 
-    if (Math.abs(curX - correctX) < 3 && Math.abs(curY - correctY) < 3) {
-      dragging.style.left = `${correctX}vw`;
+    // Math.abs = 절대값을 구하는 함수수
+    if (Math.abs(curX - correctX) < 3 && Math.abs(curY - correctY) < 3) { // 정답 범위 내에 위치하면
+      dragging.style.left = `${correctX}vw`; // 퍼즐 위치 정확히 정렬
       dragging.style.top = `${correctY}vh`;
-      dragging.classList.add("correct");
+      dragging.classList.add("correct"); // 맞춘 퍼즐 표시
       if (!dragging.dataset.placed) {
-        correctCount++;
-        dragging.dataset.placed = "true";
+        correctCount++; // 정답 수 증가
+        dragging.dataset.placed = "true"; // 중복 카운트 방지
       }
 
-      if (correctCount === totalPieces) {
-        board.classList.add("hidden");
-        errorThemepark.classList.remove("hidden");
-        stopGlitch();
-        stopDeepGlitch();
+      if (correctCount === totalPieces) { // 모든 퍼즐을 맞춘 경우
+        board.classList.add("hidden"); // 퍼즐 보드 숨김
+        errorThemepark.classList.remove("hidden"); // 오류 테마파크 다시 보여짐 (연출용)
+        stopGlitch(); // 글리치 멈춤
+        stopDeepGlitch(); // 딥 글리치 멈춤
         setTimeout(() => {
-          errorThemepark.classList.add("hidden");
-          Themepark.classList.remove("hidden");
-          stopTimer();
-          timer.classList.add("hidden");
+          errorThemepark.classList.add("hidden"); // 오류 테마파크 숨김
+          Themepark.classList.remove("hidden"); // 정상 테마파크 표시
+          stopTimer(); // 타이머 멈춤
+          timer.classList.add("hidden"); // 타이머 화면에서 숨김
           setTimeout(() => {
-            Message.innerText = "복구 절차 완료. \n"
-            Message.classList.remove("hidden");
+            Message.innerText = "복구 절차 완료. \n" // 메시지 출력 시작
+            Message.classList.remove("hidden"); // 메시지 영역 표시
             setTimeout(() => {
-              Message.innerText += "시스템은 정상적으로 복구되었습니다. \n";
+              Message.innerText += "시스템은 정상적으로 복구되었습니다. \n"; // 메시지 추가 출력
               setTimeout(() => {
-                Message.innerText += "게임을 종료하시겠습니까?";
-                YorN.classList.remove("hidden");
+                Message.innerText += "게임을 종료하시겠습니까?"; // 마지막 질문 출력
+                YorN.classList.remove("hidden"); // YES/NO 버튼 표시
               }, 1000);
             }, 1000);
           }, 1500);
-          Yes.addEventListener('click', () => {
-            YorN.classList.add("hidden");
-            textType(WinEnd, Message, () => {
-              setTimeout(() => {
-                blackBg.classList.remove("hidden");
-                Message.classList.remove("hidden");
-                setTimeout(() => {
-                  textType(gameWin01, Message, () => {
-                    textType(gameWin02, Message, () => {
-                      textType(gameWin03, Message, () => {
 
+          Yes.addEventListener('click', () => { // YES 클릭 시 실행
+            YorN.classList.add("hidden"); // 버튼 숨김
+            textType(WinEnd, Message, () => { // 종료 메시지 1단계 출력
+              setTimeout(() => {
+                Themepark.style.opacity = '0.08'; // 테마파크 반투명 처리
+                winEnding.classList.remove("hidden"); // 메시지 영역 표시
+                Message.classList.add("hidden"); // 메시지 숨김
+                setTimeout(() => {
+                  textType(gameWin01, winEnding, () => { // 메시지 단계 1 출력
+                    textType(gameWin02, winEnding, () => { // 메시지 단계 2 출력
+                      textType(gameWin03, winEnding, () => { // 메시지 단계 3 출력 완료
                       }, 1500);
                     }, 1500);
                   }, 1500);
                 }, 1500);
+                setTimeout(() => {
+                  topCover.classList.add("slideDown");
+                  bottomCover.classList.add("slideUp");
+                }, 41500);
               }, 1000)
             })
-
           })
-          No.addEventListener('click', () => {
-            YorN.classList.add("hidden");
-            textType(NoTxt, Message, () => {
-              blackBg.classList.remove("hidden");
-              Message.classList.remove("hidden");
-              setTimeout(() => {
-                textType(gameWin01, Message, () => {
-                  textType(gameWin02, Message, () => {
-                    textType(gameWin03, Message, () => {
 
-                    }, 1500);
+          No.addEventListener('click', () => { // NO 클릭 시 실행
+            YorN.classList.add("hidden"); // 버튼 숨김
+            Message.classList.remove("hidden"); // 메시지 영역 표시
+            textType(NoTxt, Message, () => { // NO 선택 메시지 출력
+              setTimeout(() => {
+                Themepark.style.opacity = '0.08'; // 반투명 처리
+                Message.classList.add("hidden"); // 메시지 숨김
+                winEnding.classList.remove("hidden"); // 메시지 영역 표시
+                textType(gameWin01, winEnding, () => { // 이후 메시지 순차 출력
+                  textType(gameWin02, winEnding, () => {
+                    textType(gameWin03, winEnding, () => {}, 1500);
                   }, 1500);
                 }, 1500);
-              }, 1500);
+                setTimeout(() => {
+                  topCover.classList.add("slideDown");
+                  bottomCover.classList.add("slideUp");
+                }, 41500);
+              }, 500);
             })
-
           })
-
         })
       }
     } else {
-      dragging.classList.add("pzError");
+      dragging.classList.add("pzError"); // 틀리게 놓은 퍼즐에 애니메이션 효과
       const thisPiece = dragging;
       setTimeout(() => {
-        thisPiece.classList.remove("pzError");
+        thisPiece.classList.remove("pzError"); // 효과 제거
       }, 1000)
-
     }
 
-    dragging.classList.remove("dragging");
-    dragging = null;
+    dragging.classList.remove("dragging"); // 드래그 상태 해제
+    dragging = null; // 드래그 객체 초기화
   });
 }

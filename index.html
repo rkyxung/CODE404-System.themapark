@@ -5,11 +5,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
   rel="stylesheet">
 <link rel="stylesheet" href="index.css">
+<link rel="stylesheet" href="animation.css">
 </head>
 
 <body>
   <!-- <div class="Bg hidden"></div>
   <div class="black hidden"></div> -->
+  <!-- 클릭 방지용 -->
+  <div id="noClick" class="hidden"></div>
   <!-- 오류 전 테마파크 씬 -->
   <div class="Themepark">
     <img id="bg_normal" src="img/Background.png" class="background" alt="background" />
@@ -35,7 +38,15 @@
       <button id="YES">YES</button>
       <button id="NO">NO</button>
     </div>
+
+    <div class="endingYorN hidden">
+      <button id="endingYES">YES</button>
+      <button id="endingNO">NO</button>
+    </div>
   </div>
+
+  <div class="endingWin hidden"></div>
+  <div class="endingOver hidden"></div>
 
   <div id="blackBg" class="hidden"></div>
 
@@ -123,7 +134,6 @@
     <img id="computer_front" src="img/OFFICE/computer_front.png" alt="computer front" />
     <div id="computer_message"> ERROR </div>
     <div id="computer_password">password: </div>
-    <div id="computer_answer"></div>
   </div>
   <!-- 사물함 top 뷰 -->
   <div class="locker_view hidden">
@@ -138,7 +148,8 @@
   <div class="puzzleBoard hidden"></div>
 
   <div class="gameOver hidden">
-    <div id="m1" class="hidden">&gt;&gt;&gt; >>> FATAL ERROR: System integrity check failed at 0x0047:000C &lt;&lt;&lt;</div>
+    <div id="m1" class="hidden">&gt;&gt;&gt; >>> FATAL ERROR: System integrity check failed at 0x0047:000C &lt;&lt;&lt;
+    </div>
     <div id="m2" class="hidden">▒▒▒▒▒▒▒▒▒▒▒▒ ERROR CODE: ∆F-404-NULL ▒▒▒▒▒▒▒▒▒▒▒▒</div>
     <div id="m3" class="hidden">☓☓☓ 𝙍𝙐𝙉𝙏𝙄𝙈𝙀_𝙍𝙐𝙄𝙉 ☓☓☓</div>
     <div id="m4" class="hidden">&gt;&gt;&gt; Attempting Recovery... FAILED</div>
@@ -164,6 +175,9 @@
     <div id="m24" class="hidden">☓☓☓☓ 0110_Fa1lur3</div>
     <div id="m25" class="hidden">□□□□□□□□ LOST_SIGNAL</div>
   </div>
+
+  <div class="cover top" id="topCover"></div>
+  <div class="cover bottom" id="bottomCover"></div>
 
   <script type="module" src="script/main.js"></script>
 </body>

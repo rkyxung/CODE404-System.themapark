@@ -21,10 +21,11 @@ body {
   cursor: url('img/Group 46.png'), auto;
 }
 
-.Themapark {
+.Themepark {
   position: relative;
   width: 100vw;
   height: 100vh;
+  z-index: 1;
 }
 
 /* 배경 */
@@ -226,14 +227,14 @@ body {
   /* ✅ 너비 고정 + 높이는 자동 */
   width: 55vw;
   height: auto;
-  margin-top: 5vh;
+  margin-top: 1vh;
 
   /* ✅ 안쪽 여백 및 외곽 스타일 */
   padding: 2vh 2vw;
 
   /* ✅ 텍스트 관련 스타일 */
   font-size: 1.5vw;
-  line-height: 2.5vw;
+  line-height: 3vw;
   color: rgb(230, 0, 0);
   white-space: pre-wrap;
   /* 줄바꿈 허용 */
@@ -280,6 +281,97 @@ body {
   border: 2px solid rgb(0, 230, 255);
   border-radius: 0.8vw;
   z-index: 999;
+}
+
+.endingYorN {
+  display: flex;
+  justify-content: space-between;
+}
+
+.endingYorN button:hover {
+  -webkit-text-stroke: 0.05vw rgb(156, 243, 250);
+  background-color: rgba(8, 70, 109, 0.5);
+  box-shadow: 0 0 0 0.5px rgb(156, 243, 250);
+}
+
+
+#endingYES {
+  margin: 2vh 0 0 9vw;
+  width: 5vw;
+  font-size: 1.5vw;
+  padding: 0.5vw 1.2vw;
+  color: rgb(0, 230, 255);
+  background-color: rgba(8, 70, 109, 0.5);
+  border: 2px solid rgb(0, 230, 255);
+  border-radius: 0.8vw;
+  z-index: 999;
+
+}
+
+#endingNO {
+  margin: 2vh 9vw 0 0;
+  width: 5vw;
+  font-size: 1.5vw;
+  padding: 0.5vw 1.2vw;
+  color: rgb(0, 230, 255);
+  background-color: rgba(8, 70, 109, 0.5);
+  border: 2px solid rgb(0, 230, 255);
+  border-radius: 0.8vw;
+  z-index: 999;
+}
+
+.endingWin {
+  position: fixed;
+  top: 5vh;
+  left: 15vw;
+  /* ✅ 너비 고정 + 높이는 자동 */
+  min-width: 30vw;
+  height: auto;
+
+  /* ✅ 안쪽 여백 및 외곽 스타일 */
+  padding: 2vh 2vw;
+  border-radius: 1vw;
+
+  /* ✅ 텍스트 관련 스타일 */
+  font-size: 1.75vw;
+  line-height: 3vw;
+  color: rgb(0, 230, 255);
+  white-space: pre-wrap;
+  /* 줄바꿈 허용 */
+
+  /* ✅ 줄 추가를 위한 구조 변경 */
+  display: flex;
+  flex-direction: column;
+  /* 줄을 세로 방향으로 쌓기 */
+  gap: 0.5vh;
+  /* 줄 간 간격 */
+}
+
+.endingOver {
+  position: fixed;
+  top: 5vh;
+  left: 15vw;
+  /* ✅ 너비 고정 + 높이는 자동 */
+  min-width: 30vw;
+  height: auto;
+
+  /* ✅ 안쪽 여백 및 외곽 스타일 */
+  padding: 2vh 2vw;
+  border-radius: 1vw;
+
+  /* ✅ 텍스트 관련 스타일 */
+  font-size: 1.75vw;
+  line-height: 3vw;
+  color: rgb(230, 0, 0);
+  white-space: pre-wrap;
+  /* 줄바꿈 허용 */
+
+  /* ✅ 줄 추가를 위한 구조 변경 */
+  display: flex;
+  flex-direction: column;
+  /* 줄을 세로 방향으로 쌓기 */
+  gap: 0.5vh;
+  /* 줄 간 간격 */
 }
 
 #timer {
@@ -389,11 +481,11 @@ body {
 
 .modal.Password,
 .modal.Chart {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  position: fixed;
+  top: -10%;
+  left: -10%;
+  width: 130vw;
+  height: 130vh;
   background: rgba(0, 0, 0, 0.8);
   z-index: 9999;
 }
@@ -404,8 +496,8 @@ body {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(4, 1fr);
   gap: 0;
-  top: 47.9vh;
-  left: 50.2vw;
+  top: 60.4vh;
+  left: 59.2vw;
   /* width: 20vw;
   height: 20vh; */
   transform: translateX(-50%);
@@ -428,11 +520,12 @@ body {
 
 #modal_password {
   position: absolute;
-  top: 55vh;
-  left: 50vw;
+  top: 67vh;
+  left: 59vw;
   width: 20vw;
   height: auto;
   transform: translate(-50%, -50%);
+  overflow: hidden;
 }
 
 #modal_flowchart {
@@ -586,6 +679,7 @@ body {
   transform-origin: 100% 10%;
 }
 
+
 /* 컴퓨터 정면뷰 */
 .Computer_puzzle03 {
   width: 100vw;
@@ -625,11 +719,14 @@ body {
 #computer_message {
   position: absolute;
   top: 38vh;
-  left: 43vw;
+  /* left: 43vw; */
+  left: 0;
+  width: 100%;
   color: rgb(230, 0, 0);
   font-size: 5vw;
   letter-spacing: 0.5vw;
   z-index: 9999;
+  text-align: center;
 }
 
 #computer_password {
@@ -904,4 +1001,34 @@ body {
 
 .pzError {
   animation: pzError 0.3s;
+}
+
+#noClick {
+  position: fixed;
+  /* background: #fff; */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999999;
+}
+
+.cover {
+  position: fixed;
+  width: 100vw;
+  height: 50vh;
+  background-color: black;
+  z-index: 2;
+  pointer-events: none;
+  z-index: 99999;
+}
+
+.cover.top {
+  top: -50%;
+  /* 처음에 위쪽 화면 바깥에 있음 */
+}
+
+.cover.bottom {
+  bottom: -50%;
+  /* 처음에 아래쪽 화면 바깥에 있음 */
 }
