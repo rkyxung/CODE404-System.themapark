@@ -29,6 +29,11 @@ import {
   ThemeparkBgm
 } from "./start.js";
 
+import {
+  glitchBgm 
+} from "./puzzle01.js";
+
+
 import { monitorEffect } from "./gameOver.js";
 
 export function puzzle04(onComplete) {
@@ -487,6 +492,7 @@ export function puzzle04(onComplete) {
       }
 
       if (correctCount === totalPieces) { // 모든 퍼즐을 맞춘 경우
+        glitchBgm.pause(); // 글리치 효과음 정지
         successEffect.play(); // 성공 효과음 재생
         board.classList.add("hidden"); // 퍼즐 보드 숨김
         errorThemepark.classList.remove("hidden"); // 오류 테마파크 다시 보여짐
