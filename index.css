@@ -171,80 +171,59 @@ body {
 }
 
 .SystemIntro {
-  /* ✅ 너비 고정 + 높이는 자동 */
   min-width: 30vw;
   height: auto;
 
-  /* ✅ 안쪽 여백 및 외곽 스타일 */
   padding: 2vh 2vw;
   background-color: rgba(8, 70, 109, 0.5);
   border: 2px solid rgb(14, 223, 237);
   border-radius: 1vw;
 
-  /* ✅ 텍스트 관련 스타일 */
   font-size: 1.25vw;
   line-height: 2vw;
   color: rgb(14, 223, 237);
   white-space: pre-wrap;
-  /* 줄바꿈 허용 */
 
-  /* ✅ 줄 추가를 위한 구조 변경 */
   display: flex;
   flex-direction: column;
-  /* 줄을 세로 방향으로 쌓기 */
   gap: 0.5vh;
-  /* 줄 간 간격 */
   z-index: 999999;
 }
 
 .SystemMessage {
-  /* ✅ 너비 고정 + 높이는 자동 */
   min-width: 30vw;
   height: auto;
 
-  /* ✅ 안쪽 여백 및 외곽 스타일 */
   padding: 2vh 2vw;
   background-color: rgba(230, 0, 0, 0.1);
   border: 2px solid rgb(230, 0, 0);
   border-radius: 1vw;
 
-  /* ✅ 텍스트 관련 스타일 */
   font-size: 1.25vw;
   line-height: 2vw;
   color: rgb(230, 0, 0);
   white-space: pre-wrap;
-  /* 줄바꿈 허용 */
 
-  /* ✅ 줄 추가를 위한 구조 변경 */
   display: flex;
   flex-direction: column;
-  /* 줄을 세로 방향으로 쌓기 */
   gap: 0.5vh;
-  /* 줄 간 간격 */
 }
 
 .errorMessage {
-  /* ✅ 너비 고정 + 높이는 자동 */
   width: 55vw;
   height: auto;
   margin-top: 1vh;
 
-  /* ✅ 안쪽 여백 및 외곽 스타일 */
   padding: 2vh 2vw;
 
-  /* ✅ 텍스트 관련 스타일 */
   font-size: 1.5vw;
   line-height: 3vw;
   color: rgb(230, 0, 0);
   white-space: pre-wrap;
-  /* 줄바꿈 허용 */
 
-  /* ✅ 줄 추가를 위한 구조 변경 */
   display: flex;
   flex-direction: column;
-  /* 줄을 세로 방향으로 쌓기 */
   gap: 0.5vh;
-  /* 줄 간 간격 */
 }
 
 .YorN {
@@ -324,54 +303,38 @@ body {
   position: fixed;
   top: 5vh;
   left: 15vw;
-  /* ✅ 너비 고정 + 높이는 자동 */
   min-width: 30vw;
   height: auto;
 
-  /* ✅ 안쪽 여백 및 외곽 스타일 */
   padding: 2vh 2vw;
   border-radius: 1vw;
 
-  /* ✅ 텍스트 관련 스타일 */
   font-size: 1.75vw;
   line-height: 3vw;
   color: rgb(0, 230, 255);
   white-space: pre-wrap;
-  /* 줄바꿈 허용 */
-
-  /* ✅ 줄 추가를 위한 구조 변경 */
   display: flex;
   flex-direction: column;
-  /* 줄을 세로 방향으로 쌓기 */
   gap: 0.5vh;
-  /* 줄 간 간격 */
 }
 
 .endingOver {
   position: fixed;
   top: 5vh;
   left: 15vw;
-  /* ✅ 너비 고정 + 높이는 자동 */
   min-width: 30vw;
   height: auto;
 
-  /* ✅ 안쪽 여백 및 외곽 스타일 */
   padding: 2vh 2vw;
   border-radius: 1vw;
 
-  /* ✅ 텍스트 관련 스타일 */
   font-size: 1.75vw;
   line-height: 3vw;
   color: rgb(230, 0, 0);
   white-space: pre-wrap;
-  /* 줄바꿈 허용 */
-
-  /* ✅ 줄 추가를 위한 구조 변경 */
   display: flex;
   flex-direction: column;
-  /* 줄을 세로 방향으로 쌓기 */
   gap: 0.5vh;
-  /* 줄 간 간격 */
 }
 
 #timer {
@@ -382,18 +345,15 @@ body {
   right: 2vw;
   z-index: 99999;
 
-  /* ✅ 안쪽 여백 및 외곽 스타일 */
   /* padding: 1.5vh 1vw;
   background-color: rgba(230, 0, 0, 0.1);
   border: 3px solid rgb(230, 0, 0);
   border-radius: 1vw; */
 
-  /* ✅ 텍스트 관련 스타일 */
   font-size: 2.25vw;
   line-height: 1.5vw;
   color: rgb(230, 0, 0);
   white-space: pre-wrap;
-  /* 줄바꿈 허용 */
   text-align: center;
 }
 

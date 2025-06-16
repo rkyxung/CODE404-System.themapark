@@ -211,7 +211,7 @@ export function gameOver() {
   document.querySelector(".Error_officeInside") ?.classList.add("hidden");
   document.querySelector(".Computer_puzzle03") ?.classList.add("hidden");
   document.querySelector(".locker_view") ?.classList.add("hidden");
-  document.querySelector("#puzzleBoard") ?.classList.add("hidden");
+  document.querySelector(".puzzleBoard") ?.classList.add("hidden");
   gameOver.classList.remove("hidden");
 
   gameOverBgm.play(); // 게임 오버 배경음악 재생
